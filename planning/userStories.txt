@@ -1,0 +1,44 @@
+User Stories
+A user story describes how users will interact with your application
+They have the form: As a ___, I want to _, because ____.
+eg. As a user, I want to be able to save posts, because I want to review them later.
+User stories can also be negated: As a __, I shouldn't be able to _, because ___.
+eg. As a user, I shouldn't be able to edit other users posts, because I don't own those posts.
+“A smart, auto-categorizing todo list app. The user simply has to add the name of the thing, and it gets put into the correct list.”
+Each todo created should be categorized as one of:
+Film / Series (To watch)
+Restaurants, cafes, etc. (To eat)
+Books (To read)
+Products (To buy)
+
+As a USER, I want to organize my TASKS by PRIORITY, because I need to see what should be COMPLETED first.
+
+As a USER, I want to add a task to my TO DO LIST, because I need to track the ITEMS I need to DO.
+
+As a USER, I want to have my TASKS organized by CATEGORY automatically to the right list, so I do not have to think about organizing them myself.
+
+As a USER, I want to be able to re-categorize my items, because it might be put into the wrong category by mistake.
+
+As a USER, I want to organize
+
+
+Given I am a USER, when I submit a new TASK, then it is added to the appropriate CATEGORY and the added ICON will change to indicate success. 
+
+As a USER, I want to delete tasks that I do not want to do anymore.
+As a USER, I want to edit tasks that I would like to change.
+
+
+
+User Scenarios
+A user scenario is a syntactic alternative to user stories
+They have the form: Given __, when _, then ____.
+eg. Given that I am logged in, when I click favourite on a post, then it is added to my favourites.
+You can also chain on an and to user stories/scenarios
+eg. eg. Given that I am logged in, when I click favourite on a post, then it is added to my favourites and the save icon will change to indicate success.
+
+
+Given that I am a USER, when i look at a day, Then all the tasks are organized by priority
+
+Given that I finish a task by clicking on it, it should be marked completed and crossed out.
+
+As a user, I want to be notified about the status of the tasks. (in progress, completed).
