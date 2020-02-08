@@ -1,5 +1,6 @@
 #nav-margin {
   display: flex;
+  justify-content: space-between;
   height: 10vh;
   width: 100vw;
   z-index: 100;
@@ -11,11 +12,9 @@
 }
 
 #nav-title {
-  justify-self: flex-start;
   align-self: center;
 }
 
 #nav-user {
-  justify-self: flex-end;
   align-self: center;
 }
