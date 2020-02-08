@@ -1,5 +1,10 @@
 #left-container {
   border: black solid;
   height: 90vh;
-  width: 50vw;
+  width: 25vw;
+}
+
+input {
+  display: flex;
+  flex-direction: row;
 }
