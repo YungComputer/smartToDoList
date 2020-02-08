@@ -1,5 +1,3 @@
--- Drop and recreate Widgets table (Example)
-
 DROP TABLE IF EXISTS tasks CASCADE;
 CREATE TABLE tasks (
   id SERIAL PRIMARY KEY NOT NULL,
@@ -8,5 +6,6 @@ CREATE TABLE tasks (
   due_date DATE,
   priority SMALLINT,
   task_category VARCHAR(255),
-  is_complete BOOLEAN
+  is_complete BOOLEAN DEFAULT FALSE
 );
+
