@@ -27,4 +27,12 @@ http://www.omdbapi.com/?apikey=[yourkey]&
 **EXAMPLE search query**  
 http://www.omdbapi.com/?apikey=4b6c6fe2&t=batman
 
+# BestBuy
+**API key:** 
+cZF2m6uriuSBjwZqxldgrTAW
+websites:
+https://bestbuyapis.github.io/api-documentation/#retrieving-collections
+https://bestbuyapis.github.io/bby-query-builder/#/productSearch
+
+
 # AMAZON API??
