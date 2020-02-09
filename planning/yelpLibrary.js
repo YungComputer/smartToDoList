@@ -1,8 +1,11 @@
 'use strict';
+require('dotenv').config({ path: '../.env' });
+
 
 const yelp = require('yelp-fusion');
-const client = yelp.client('sTF3Qt-eSGek1fwacuhYriNo6Frzy0AgRkBtqH6YViKLEa8LK_GzoQeWJb2OAjoFZgcVVmMHhaApsOCXV1tLU5x0Yw1pW2MsEziLR58muo6TXHESDCyvFlMwy_89XnYx');
-
+const key = process.env.YELP_API_KEY;
+const client = yelp.client(key);
+console.log(key)
 let restaurant = 'Miku' // This is where we'll input our search field query.
 
 client.search({
