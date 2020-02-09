@@ -1,6 +1,7 @@
 const books = require("google-books-search");
 const key = "AIzaSyBB8iVXadw6GW42T9yc_npFzJ8JDYPOX28";
-let bookInput = "Guts";
+
+let bookInput = "Guts"; // Needs to change into our search parameter.
 
 //bookInput will be the search parameter from AJAX
 books.search(bookInput, key, function(error, results) {

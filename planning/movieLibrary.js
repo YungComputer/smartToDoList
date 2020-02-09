@@ -1,8 +1,10 @@
 const omdb = require("omdb-client");
 
+const movie = 'The Terminator' // Needs to change into our search parameter
+
 const params = {
   apiKey: "4b6c6fe2",
-  title: "The Terminator"
+  title: movie,
 };
 
 omdb.get(params, function(err, data) {
