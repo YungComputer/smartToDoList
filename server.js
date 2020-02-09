@@ -31,6 +31,10 @@ app.use("/styles", sass({
 }));
 app.use(express.static("public"));
 
+// adding the cookie-parser
+var cookieParser = require('cookie-parser');
+app.use(cookieParser());
+
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
 const usersRoutes = require("./routes/users");
@@ -42,6 +46,27 @@ app.use("/api/users", usersRoutes(db));
 app.use("/api/widgets", widgetsRoutes(db));
 // Note: mount other resources here, using the same pattern above
 
+// sample data 
+const tasks = {
+  "taskRandomID": {
+    id: "userRandomID",
+    title: "searching food",
+    IsDone: true,
+    category: "food"
+  },
+  "task2RandomID": {
+    id: "user2RandomID",
+    title: "searching books",
+    IsDone: false,
+    category: "books"
+  },
+  "task3RandomID": {
+    id: "user3RandomID",
+    title: "searching movies",
+    IsDone: true,
+    category: "movies"
+  }
+}
 
 // Home page
 // Warning: avoid creating more routes in this file!
@@ -53,3 +78,46 @@ app.get("/", (req, res) => {
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
+
+// Gets
+
+// do this instead
+app.get('/login/:id', (req, res) => {
+  const user_id = req.cookies.user_id;
+  res.redirect('/');
+});
+
+// app.get("/index", (req, res) => {
+//   const task_id = req.cookes.task_id;
+//   const task = tasks[task_id];
+//   if (task) {
+//     const tempVars = {
+//       "task": task
+//     };
+//     res.render("index", tempVars);
+//   } else {
+//     res.redirect('/login');
+//   }
+// });
+// app.get("/test", (req, res)=>{
+//   console.log("we are in the test");
+// })
+
+// // added /index/:id
+// app.get("/index/:id", (req, res) => {
+//   res.render("index");
+// });
+
+// // added get /tasks/:id
+// app.get("/tasks/:id", (req, res) => {
+//   res.render("index");
+// });
+
+
+// // POSTS
+
+// // added post/tasks
+// app.post("/tasks", (req, res) => {
+//   res.render("index");
+// });
+
