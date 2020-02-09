@@ -26,6 +26,7 @@
     "omdb-client": "^2.0.0",
     "pg": "^6.4.2",
     "pg-native": "^3.0.0",
+    "sass": "^1.25.0",
     "yelp-fusion": "^3.0.0"
   },
   "devDependencies": {
