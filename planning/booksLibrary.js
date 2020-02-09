@@ -3,7 +3,7 @@ require('dotenv').config({ path: '../.env' });
 const books = require("google-books-search");
 const key = process.env.BOOKS_API_KEY;
 let bookInput = "Guts"; // Needs to change into our search parameter.
-console.log(key)
+
 //bookInput will be the search parameter from AJAX
 books.search(bookInput, key, function(error, results) {
   if (!error) {

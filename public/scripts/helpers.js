@@ -44,4 +44,4 @@ const loadToDo = () => {
   })
 }
 
-module.exports = { getCategory, createToDoElement, renderToDo, loadToDo }
+module.exports = { getCategory, createToDoElement, renderToDo, loadToDo };
