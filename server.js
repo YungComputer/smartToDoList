@@ -31,9 +31,15 @@ app.use("/styles", sass({
 }));
 app.use(express.static("public"));
 
-// adding the cookie-parser
-var cookieParser = require('cookie-parser');
-app.use(cookieParser());
+//cookie-session
+const cookieSession = require('cookie-session');
+app.use(cookieSession({
+  name: 'session',
+  keys: ['/*gjugjugjuju secret keys */'],
+
+  // Cookie Options
+  maxAge: 24 * 60 * 60 * 1000 // 24 hours
+}));
 
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
@@ -46,7 +52,7 @@ app.use("/api/users", usersRoutes(db));
 app.use("/api/widgets", widgetsRoutes(db));
 // Note: mount other resources here, using the same pattern above
 
-// sample data 
+// sample data
 const tasks = {
   "taskRandomID": {
     id: "userRandomID",
@@ -66,13 +72,21 @@ const tasks = {
     IsDone: true,
     category: "movies"
   }
-}
+};
 
 // Home page
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 app.get("/", (req, res) => {
-  res.render("index");
+  let userId = req.session.userId;
+  if (userId) {
+    let tempVars = {
+      'user': userId
+    };
+    res.render("index", tempVars);
+  } else {
+    res.send("Not Logged In");
+  }
 });
 
 app.listen(PORT, () => {
@@ -81,24 +95,14 @@ app.listen(PORT, () => {
 
 // Gets
 
-// do this instead
 app.get('/login/:id', (req, res) => {
-  const user_id = req.cookies.user_id;
+  const userId = req.params.id;
+  req.session.userId = userId;
   res.redirect('/');
 });
 
-// app.get("/index", (req, res) => {
-//   const task_id = req.cookes.task_id;
-//   const task = tasks[task_id];
-//   if (task) {
-//     const tempVars = {
-//       "task": task
-//     };
-//     res.render("index", tempVars);
-//   } else {
-//     res.redirect('/login');
-//   }
-// });
+
+
 // app.get("/test", (req, res)=>{
 //   console.log("we are in the test");
 // })
