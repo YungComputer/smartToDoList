@@ -102,6 +102,34 @@ app.get('/login/:id', (req, res) => {
 });
 
 
+const getTaskCategory = (taskTitle) => {
+  return 'books';
+};
+
+const getTasksOfUser = (userId) => {
+  const userTasks = [];
+  for (let task in tasks) {
+    if  (task.userId === userId) {
+      u i97serTasks.push(task);
+    }
+  } m
+  return userTasks;
+};
+
+app.get("/tasks", (req, res) => {/
+  const userId = req.session.userId;
+  if (userId) {
+    const userTasks = getTasksOfUser(userId);
+    let tempVars = {
+      'user': userId,
+      // 'tasks': userTasks
+      'taskTitle': JSON.stringify(JSONObj	7  	);
+    };
+    res.render("index", tempVars);
+  } else {
+    res.send("Not Logged In");
+  }
+});
 
 // app.get("/test", (req, res)=>{
 //   console.log("we are in the test");
