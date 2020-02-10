@@ -4,6 +4,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Smart To-Do List</title>
+<!-- Font Styles -->
+<link href="https://fonts.googleapis.com/css?family=Luckiest+Guy&display=swap" rel="stylesheet">
 
     <!-- CSS Styles -->
     <link rel="stylesheet" type="text/css" href="/styles/style.css" />
@@ -12,17 +14,17 @@
 
   <!-- Top nav bar (fixed) -->
   <nav class="navbar">
-    <span>Smart & Fancy To-Do List</span>
+    <span class="nav-title">Smart & Fancy To-Do List</span>
   </nav>
   <body>
       <section class="new-task">
-          <form method="POST" action="">
+          <form method="POST" action="/todos">
             <div class="new-task">
                 <textarea
                 name="text"
                 placeholder="What do you need to do?"
               ></textarea>
-              <input class="button" type="submit" value="Add" />
+              <input class="btn btn-primary" type="submit" value="submit" />
             </div>
           </form>
         </section>
@@ -33,10 +35,13 @@
     <div class="row">
       <div class="col-sm">
         <div class="card" style="width: 14rem;">
-          <img src="https://image.flaticon.com/icons/svg/481/481637.svg" class="card-img-top" alt="..." />
+          <img src="https://image.flaticon.com/icons/svg/481/481637.svg" class="card-img-top" alt="avatar" />
           <div class="card-body">
             <h5 class="card-title text-center">To Eat</h5>
           </div>
+          <form class="task-container">
+            <input class="checkbox" type="checkbox"> 
+            <span class="task-item">Arby's</span> </form>
           <ul class="list-group list-group-flush">
             <div id="eat" class="eat-container list-group-item"></div>
           </ul>
@@ -45,12 +50,13 @@
       <!-- To Read Category -->
       <div class="col-sm">
           <div class="card" style="width: 14rem;">
-            <img src="https://image.flaticon.com/icons/svg/864/864685.svg" class="card-img-top" alt="..." />
+            <img src="https://image.flaticon.com/icons/svg/864/864685.svg" class="card-img-top" alt="avatar" />
             <div class="card-body">
               <h5 class="card-title text-center">To Read</h5>
             </div>
-            <form>
-              <input type="checkbox">The Hobbit </form>
+            <form class="task-container">
+              <input class="checkbox" type="checkbox">
+              <span class="task-item">The Hobbit</span>
             </form>
             <ul class="list-group list-group-flush">
               <div id="read" class="read-container list-group-item"></div>
@@ -60,12 +66,13 @@
         <!-- To Watch Category -->
         <div class="col-sm">
             <div class="card" style="width: 14rem;">
-              <img src="https://image.flaticon.com/icons/svg/633/633600.svg" class="card-img-top" alt="..." />
+              <img src="https://image.flaticon.com/icons/svg/633/633600.svg" class="card-img-top" alt="avatar" />
               <div class="card-body">
                 <h5 class="card-title text-center">To Watch</h5>
               </div>
-              <form>
-                <input type="checkbox"> Interstellar </form>
+              <form class="task-container">
+                <input class="checkbox" type="checkbox">
+                <span class="task-item">Interstellar</span>
               </form>
               <ul class="list-group list-group-flush">
                 <div id="watch" class="watch-container list-group-item"></div>
@@ -75,10 +82,14 @@
           <!-- To Buy Category -->
           <div class="col-sm">
               <div class="card" style="width: 14rem;">
-                <img src="https://image.flaticon.com/icons/svg/1019/1019709.svg" class="card-img-top" alt="..." />
+                <img src="https://image.flaticon.com/icons/svg/1019/1019709.svg" class="card-img-top" alt="avatar" />
                 <div class="card-body">
                   <h5 class="card-title text-center">To Buy</h5>
                 </div>
+                <form class="task-container">
+                  <input class="checkbox" type="checkbox">
+                  <span class="task-item">Toilet paper</span> 
+                </form>
                 <ul class="list-group list-group-flush">
                   <div id="buy" class="buy-container list-group-item"></div>
                 </ul>
