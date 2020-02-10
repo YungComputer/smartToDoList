@@ -1,27 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Home Page</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Smart To-Do List</title>
+<!-- Font Styles -->
+<link href="https://fonts.googleapis.com/css?family=Luckiest+Guy&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
-    <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
-    <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
-    <link rel="stylesheet" href="/styles/navbar.css" type="text/css" />
-    <link rel="stylesheet" href="/styles/left-container.css" type="text/css" />
-    <link rel="stylesheet" href="/styles/right-container.css" type="text/css" />
-
-
-    <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-    <script type="text/javascript" src="/scripts/app.js"></script>
+    <!-- CSS Styles -->
+    <link rel="stylesheet" type="text/css" href="/styles/style.css" />
+    <link rel="stylesheet" type="text/css" href="/styles/nav.css" />
   </head>
 
+<<<<<<< HEAD
   <nav id='nav-margin'>
     <span id='nav-title'>Smart To Do List</span>
     <span id='nav-user'>Hello <%- user -%></span>
+=======
+  <!-- Top nav bar (fixed) -->
+  <nav class="navbar">
+    <span class="nav-title">Smart & Fancy To-Do List</span>
+>>>>>>> clare/html
   </nav>
-
-
   <body>
+<<<<<<< HEAD
 
     <main>
 
@@ -42,5 +44,84 @@
 
 
     </main>
+=======
+      <section class="new-task">
+          <form method="POST" action="/todos">
+            <div class="new-task">
+                <textarea
+                name="text"
+                placeholder="What do you need to do?"
+              ></textarea>
+              <input class="btn btn-primary" type="submit" value="submit" />
+            </div>
+          </form>
+        </section>
+>>>>>>> clare/html
   </body>
+
+  <!-- main container with categories and lists -->
+  <div class="container">
+    <div class="row">
+      <div class="col-sm">
+        <div class="card" style="width: 14rem;">
+          <img src="https://image.flaticon.com/icons/svg/481/481637.svg" class="card-img-top" alt="avatar" />
+          <div class="card-body">
+            <h5 class="card-title text-center">To Eat</h5>
+          </div>
+          <form class="task-container">
+            <input class="checkbox" type="checkbox"> 
+            <span class="task-item">Arby's</span> </form>
+          <ul class="list-group list-group-flush">
+            <div id="eat" class="eat-container list-group-item"></div>
+          </ul>
+        </div>
+      </div>
+      <!-- To Read Category -->
+      <div class="col-sm">
+          <div class="card" style="width: 14rem;">
+            <img src="https://image.flaticon.com/icons/svg/864/864685.svg" class="card-img-top" alt="avatar" />
+            <div class="card-body">
+              <h5 class="card-title text-center">To Read</h5>
+            </div>
+            <form class="task-container">
+              <input class="checkbox" type="checkbox">
+              <span class="task-item">The Hobbit</span>
+            </form>
+            <ul class="list-group list-group-flush">
+              <div id="read" class="read-container list-group-item"></div>
+            </ul>
+          </div>
+        </div>
+        <!-- To Watch Category -->
+        <div class="col-sm">
+            <div class="card" style="width: 14rem;">
+              <img src="https://image.flaticon.com/icons/svg/633/633600.svg" class="card-img-top" alt="avatar" />
+              <div class="card-body">
+                <h5 class="card-title text-center">To Watch</h5>
+              </div>
+              <form class="task-container">
+                <input class="checkbox" type="checkbox">
+                <span class="task-item">Interstellar</span>
+              </form>
+              <ul class="list-group list-group-flush">
+                <div id="watch" class="watch-container list-group-item"></div>
+              </ul>
+            </div>
+          </div>
+          <!-- To Buy Category -->
+          <div class="col-sm">
+              <div class="card" style="width: 14rem;">
+                <img src="https://image.flaticon.com/icons/svg/1019/1019709.svg" class="card-img-top" alt="avatar" />
+                <div class="card-body">
+                  <h5 class="card-title text-center">To Buy</h5>
+                </div>
+                <form class="task-container">
+                  <input class="checkbox" type="checkbox">
+                  <span class="task-item">Toilet paper</span> 
+                </form>
+                <ul class="list-group list-group-flush">
+                  <div id="buy" class="buy-container list-group-item"></div>
+                </ul>
+              </div>
+            </div>
 </html>
