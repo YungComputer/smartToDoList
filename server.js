@@ -110,7 +110,7 @@ const getTasksOfUser = (userId) => {
   const userTasks = [];
   for (let task in tasks) {
     if  (task.userId === userId) {
-      u i97serTasks.push(task);
+      tasks.push(task);
     }
   } m
   return userTasks;
