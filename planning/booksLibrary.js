@@ -6,20 +6,25 @@ const key = process.env.BOOKS_API_KEY;
 
 //bookInput will be the search parameter from AJAX
 const book = function(task) {
-  return books.search(task, key, function(error, results) {
-    if (!error) {
-      for (const bookTitle of results) {
-        for (const title in bookTitle) {
-          if (bookTitle[title] === task) {
-            return console.log("I found book:", task);
-            // console.log(results)
+  return new Promise ((resolve, reject) => {
+    books.search(task, key, function(error, results) {
+      if (!error) {
+        for (const bookTitle of results) {
+          for (const title in bookTitle) {
+            // if (bookTitle[title] === task) {
+              console.log("I found book:", task);
+              return resolve(true);
+              // console.log(results)
+            // }
           }
+
         }
+      } else {
+        console.log(error, 'nothing showed up for books');
+        return resolve(false);
       }
-    } else {
-      console.log(error, 'nothing showed up for books');
-    }
-  });
+    });
+  })
 }
 
 // `https://www.googleapis.com/books/v1/volumes?q=[INPUT]&key=${key}`

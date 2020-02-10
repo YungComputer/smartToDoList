@@ -21,9 +21,11 @@ const restaurant = (task) => {
         if (business[x] === task) { // Needs to check against our search field query.
 
         console.log('you have restaurant:', task); // Change what it needs to return.
+        return true;
         }
       }
     }
+    return false;
 
   })
   .catch(e => {
@@ -32,6 +34,6 @@ const restaurant = (task) => {
 }
 
 
-// console.log(restaurant('Miku'))
+// console.log(restaurant('Miku'), 'this is the function')
 
 module.exports = { restaurant };

@@ -5,14 +5,18 @@ const omdb = require("omdb-client");
 const key = process.env.OMDB_API_KEY;
 
 const movie = (task) => {
-  omdb.get({ apiKey: key, title: task }, function(err, data) {
-    if (!err) {
-      console.log('Here is your movie:', data.Title);
-    }
-    if (err) {
-      console.error(err);
-    }
-  });
+  return new Promise ((resolve, reject) => {
+    omdb.get({ apiKey: key, title: task }, function(err, data) {
+      if (!err) {
+        console.log('Here is your movie:', data.Title);
+        return resolve(true);
+      }
+      if (err) {
+        console.error(err);
+        return resolve(false);
+      }
+    });
+  })
 }
 
 module.exports = { movie }
