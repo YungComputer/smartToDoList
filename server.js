@@ -1,6 +1,7 @@
 // load .env data into process.env
 require('dotenv').config();
 
+
 // Web server config
 const PORT       = process.env.PORT || 8080;
 const ENV        = process.env.ENV || "development";
@@ -16,6 +17,12 @@ const dbParams = require('./lib/db.js');
 const db = new Pool(dbParams);
 db.connect();
 
+
+// API function checks
+const { restaurant } = require('./planning/yelpLibrary');
+const { book } = require('./planning/booksLibrary');
+const { movie } = require('./planning/movieLibrary');
+
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
 //         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
@@ -23,6 +30,7 @@ app.use(morgan('dev'));
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 app.use("/styles", sass({
   src: __dirname + "/styles",
   dest: __dirname + "/public/styles",
@@ -125,3 +133,34 @@ app.get('/login/:id', (req, res) => {
 //   res.render("index");
 // });
 
+
+
+// Categorizes the task.  Promise.all returns an arrive of defined values.
+const getCategory = (task) => {
+
+  return Promise.all([restaurant(task), book(task), movie(task)])
+  .then((results) => {
+    console.log('getCat results:', results)
+    if (results[0]) {
+      return 'restaurants'
+    }
+    if (results[2]) {
+      return 'movies'
+    }
+    if (results[1]) {
+      return 'books'
+    }
+    return 'products'
+  })
+
+}
+
+app.post('/todos', (req, res) => {
+  // console.log(req.body.task)
+  // console.log(getCategory(req.body.task))
+
+  getCategory(req.body.task).then(data => {
+    console.log(data)
+    res.send(data)}) // it sends the first result that returns true
+
+})

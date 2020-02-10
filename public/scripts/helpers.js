@@ -1,23 +1,8 @@
-// Categorizes the task.
-const getCategory = (task) => {
-
-  if (restaurant(task)) {
-    return 'restaurants';
-  }
-  if (book(task)) {
-    return  'books';
-  }
-  if (movie(task)) {
-    return  'movies';
-  }
-  return 'products';
-
-}
 
 // Appends all the data together for the to do list.
 const createToDoElement = function(todo) { // The argument is the task the user inputs.
-  let $checkBox = $('<checkbox>').addclass('insertclass')
-  let $todo = $('<span>').addClass('insertclass'); // Not sure what elements/ids/classes are being used yet
+  let $checkBox = $('<input>').addclass('checkbox')
+  let $todo = $('<span>').addClass('task-item'); // Not sure what elements/ids/classes are being used yet
   $checkBox.append($todo);
 
   return $checkBox;
@@ -26,9 +11,9 @@ const createToDoElement = function(todo) { // The argument is the task the user 
 // Renders the data to display the todo box.
 const renderToDo = function(todos) {
   todos.forEach((todo) => {
-    const $todos = $('#todoContainer'); // Have to figure out the element/id/class
-    const $article = createToDoElement(todo);
-    $todos.append($article);
+    const $todos = $('.task-container'); // Have to figure out the element/id/class
+    const $form = createToDoElement(todo);
+    $todos.append($form);
   });
 };
 
