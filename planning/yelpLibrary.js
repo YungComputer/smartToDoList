@@ -19,8 +19,7 @@ const restaurant = (task) => {
     for (let business of businesses) {
       for (let x in business) {
         if (business[x] === task) { // Needs to check against our search field query.
-
-        console.log('you have restaurant:', task); // Change what it needs to return.
+        console.log('you have restaurant:', task);
         return true;
         }
       }
@@ -32,8 +31,5 @@ const restaurant = (task) => {
     console.log(e);
   });
 }
-
-
-// console.log(restaurant('Miku'), 'this is the function')
 
 module.exports = { restaurant };

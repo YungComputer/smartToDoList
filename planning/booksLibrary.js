@@ -11,15 +11,17 @@ const book = function(task) {
       if (!error) {
         for (const bookTitle of results) {
           for (const title in bookTitle) {
-            // if (bookTitle[title] === task) {
+            if (bookTitle[title] === task) {
               console.log("I found book:", task);
               return resolve(true);
               // console.log(results)
-            // }
+            }
           }
-
         }
+        return resolve(false);
+
       } else {
+        // Jeremy thinks this code is misleading
         console.log(error, 'nothing showed up for books');
         return resolve(false);
       }

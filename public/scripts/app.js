@@ -1,3 +1,5 @@
+const { getCategory, createToDoElement, renderToDo, loadToDo } = require('./helpers')
+
 $(() => {
   $.ajax({
     method: "GET",
@@ -7,35 +9,32 @@ $(() => {
     for(user of users) {
       $("<div>").text(user.name).appendTo($("body"));
     }
-  });;
+  });
 });
 
 $(document).ready(function() {
 
-  loadToDo(); // this is to auto populate data from our DB for the starting page.
+  // loadToDo(); // this is to auto populate data from our DB for the starting page.
 
   // when form gets submitted this should run.
   $form.on('submit', (event) => {  // look for the element Clare uses
     event.preventDefault();
+    const textField = $('textarea').val();
 
-    const category = getCategory(textinput)
-
-    if (category) {  // calls yelpLibrary.js function with text input from user
 
       $.ajax({
         url: '/todos',
         method: 'POST',
-        data: serialized,
+        data: textField,
       })
         .done((post) => {
+          $('textarea').val('') // figure out the element Clare uses, this emptys the textarea
 
-          $textField.val('') // figure out the element Clare uses, this emptys the textarea
-          loadToDo();
         })
         .fail((err) => {
           console.log(err);
         })
-    }
+
   });
 
 });
