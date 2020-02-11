@@ -19,9 +19,9 @@ db.connect();
 
 
 // API function checks
-const { restaurant } = require('./planning/yelpLibrary');
-const { book } = require('./planning/booksLibrary');
-const { movie } = require('./planning/movieLibrary');
+const { restaurant } = require('./apis/yelpLibrary');
+const { book } = require('./apis/booksLibrary');
+const { movie } = require('./apis/movieLibrary');
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
