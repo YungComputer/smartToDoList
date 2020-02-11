@@ -28,24 +28,28 @@ const createToDoElement = function(todo) { // The argument is the task the user 
 };
 
 // Renders the data to display the todo box.
-const renderToDo = function(todos) {
-  console.log('rendertodo argument:', todos)
-  const $todos = $('.task-container'); // Have to figure out the element/id/class
-  // before adding all the new tasks in, maybe clear out all the existing ones?
-    const $form = createToDoElement(todos)
-    $todos.append($form);
+const renderToDo = function(todos, category) {
+
+
+  const $todos = $(`.${category}`);
+  const $form = createToDoElement(todos)
+  $todos.append($form);
 };
 
 // Loads all the data up to be required by a POST.
 
-const loadToDo = () => {
+const loadToDo = (category) => {
+
+  console.log('inside the loadtodo, before get request')
   $.ajax({
     url: '/tasksAsJson',  // what is the route we need?
     method: 'GET',
     dataType: 'JSON',
     success: (result) => {
-      console.log('loadToDo results:', result[0].title);
-      renderToDo(result[0].title);
+      // console.log('loadToDo results:', result[0].title);
+      console.log('inside the get request of loadtodo')
+      console.log(result[0])
+      renderToDo(result[0].title, category);
     },
     error: (jqxhr, status, err) => {
       console.error("Error on the lodaToDo function:", status, err);
@@ -57,23 +61,28 @@ const loadToDo = () => {
   // loadToDo(); // this is to auto populate data from our DB for the starting page.
 
   // when form gets submitted this should run.
+  const $btn = $("#submit-btn")
+  console.log($btn)
+
   $("#submit-btn").on("click", event => {
     // look for the element Clare uses
     event.preventDefault();
-    const textField = $("textarea").val();
+    // const textField = $("textarea").val();
     // console.log("User textarea input:", textField);
     // console.log('serialize me:', $("textarea").serialize())
 
 
+    console.log('before the post')
     $.ajax({
       url: "/todos",
       method: "POST",
       data: $("#task-form").serialize()
     })
       .done(category => {
+        console.log('inside the post response')
         console.log(category)
         $("textarea").val(""); // empties the text area
-        loadToDo();
+        loadToDo(category);
       })
       .fail(err => {
         console.log(err);
