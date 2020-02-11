@@ -166,7 +166,7 @@ const getCategory = (task) => {
 
   return Promise.all([restaurant(task), book(task), movie(task)])
   .then((results) => {
-    console.log('getCat results:', results)
+    // console.log('getCat results:', results)
     if (results[0]) {
       return 'restaurants'
     }
@@ -182,11 +182,12 @@ const getCategory = (task) => {
 }
 
 app.post('/todos', (req, res) => {
-  // console.log(req.body.task)
+  const task = req.body.text;
+  // console.log(req.body.text)
   // console.log(getCategory(req.body.task))
 
-  getCategory(req.body.task).then(data => {
-    console.log(data)
+  getCategory(task).then(data => {
+    // console.log(data)
     res.send(data)
   }) // it sends the first result that returns true
 

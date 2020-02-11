@@ -20,13 +20,29 @@ const renderToDo = function(todos) {
 // Loads all the data up to be required by a POST.
 const loadToDo = () => {
   $.ajax({
-    url: '/',  // what is the route we need?
+    url: '/todos',  
     method: 'GET',
-    dataType: 'JSON',
+    dataType: 'text',
     success: (post) => {
+      console.log(post);
       renderToDo(post);
     }
   })
 }
 
-module.exports = { getCategory, createToDoElement, renderToDo, loadToDo };
+const postToDo = () => {
+  $.ajax({
+    url: '/todos',  
+    method: 'POST',
+    dataType: 'text',
+    success: (post) => {
+      console.log(post);
+      renderToDo(post);
+    }
+  })
+}
+
+// loadToDo();
+// postToDo();
+
+// module.exports = { getCategory, createToDoElement, renderToDo, loadToDo };

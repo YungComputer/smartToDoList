@@ -3,20 +3,27 @@
 }
 
 body {
-  font-family: 'Luckiest Guy';
+  font-family: "Luckiest Guy";
 }
 
 .new-task {
-display: flex;
-justify-content: center;
-margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
 }
 
 textarea {
   width: 250px;
+  font-family: 'Luckiest Guy';
+  font-size: medium;
 }
 
-input[type=submit] {
+.btn {
+  font-family: "Luckiest Guy";
+  font-size: Large;
+}
+
+input[type="submit"] {
   margin-left: 10px;
   color: white;
   background-color: #1dbbbb;
@@ -47,7 +54,6 @@ Clear floats after the columns */ row:after {
   text-align: center;
   background-color: #e9e9e9;
   border-radius: 20px;
-
 }
 
 /* Responsive columns - one column layout (vertical) on small screens */
