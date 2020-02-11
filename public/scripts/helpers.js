@@ -18,9 +18,10 @@ const renderToDo = function(todos) {
 };
 
 // Loads all the data up to be required by a POST.
+
 const loadToDo = () => {
   $.ajax({
-    url: '/',  // what is the route we need?
+    url: '/tasksAsJson',  // what is the route we need?
     method: 'GET',
     dataType: 'JSON',
     success: (post) => {

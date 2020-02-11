@@ -66,19 +66,22 @@ const tasks = {
     id: "userRandomID",
     title: "searching food",
     IsDone: true,
-    category: "food"
+    category: "food",
+    userId: 1
   },
   "task2RandomID": {
     id: "user2RandomID",
     title: "searching books",
     IsDone: false,
-    category: "books"
+    category: "books",
+    userId: 2
   },
   "task3RandomID": {
     id: "user3RandomID",
     title: "searching movies",
     IsDone: true,
-    category: "movies"
+    category: "movies",
+    userId: 3
   }
 };
 
@@ -124,7 +127,7 @@ const getTasksOfUser = (userId) => {
   return userTasks;
 };
 
-app.get("/tasks", (req, res) => {/
+app.get("/tasks", (req, res) => {
   const userId = req.session.userId;
   if (userId) {
     const userTasks = getTasksOfUser(userId);
@@ -132,6 +135,17 @@ app.get("/tasks", (req, res) => {/
       'user': userId
     };
     res.render("index", tempVars);
+  } else {
+    res.send("Not Logged In");
+  }
+});
+
+// testing that it returns json object
+app.get("/tasksAsJson", (req, res) => {
+  const userId = req.session.userId;
+  if (userId) {
+    const userTasks = getTasksOfUser(userId);
+    // res.json(userTasks); ????
   } else {
     res.send("Not Logged In");
   }
