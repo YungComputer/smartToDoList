@@ -5,8 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Smart To-Do List</title>
 
+
     <!-- Font Styles -->
     <link href="https://fonts.googleapis.com/css?family=Luckiest+Guy&display=swap" rel="stylesheet">
+    <!-- External JS Scripts -->
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"></script>
+    <script type="text/javascript" src="/scripts/app.js"></script>
+    <script type="text/javascript" src="/scripts/helpers.js"></script>
 
     <!-- CSS Styles -->
     <link rel="stylesheet" type="text/css" href="/styles/style.css" />
@@ -27,13 +35,13 @@
   </nav>
   <body>
       <section class="new-task">
-          <form method="POST" action="/todos">
+          <form id="task-form" method="POST" action="/todos">
             <div class="new-task">
                 <textarea
                 name="text"
                 placeholder="What do you need to do?"
               ></textarea>
-              <input class="btn btn-primary" type="submit" value="submit" />
+              <input class="btn btn-primary" id="submit-btn" type="submit" value="submit" />
             </div>
           </form>
         </section>

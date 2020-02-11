@@ -88,17 +88,17 @@ const tasks = {
 // Home page
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
-app.get("/", (req, res) => {
-  let userId = req.session.userId;
-  if (userId) {
-    let tempVars = {
-      'user': userId
-    };
-    res.render("index", tempVars);
-  } else {
-    res.send("Not Logged In");
-  }
-});
+// app.get("/", (req, res) => {
+//   let userId = req.session.userId;
+//   if (userId) {
+//     let tempVars = {
+//       'user': userId
+//     };
+//     res.render("index", tempVars);
+//   } else {
+//     res.send("Not Logged In");
+//   }
+// });
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
@@ -106,12 +106,11 @@ app.listen(PORT, () => {
 
 // Gets
 
-app.get('/login/:id', (req, res) => {
-  const userId = req.params.id;
-  req.session.userId = userId;
-  res.redirect('/');
-});
-
+// app.get('/login/:id', (req, res) => {
+//   const userId = req.params.id;
+//   req.session.userId = userId;
+//   res.redirect('/');
+// });
 
 const getTasksOfUser = (userId) => {
   userId = Number(userId);
@@ -159,7 +158,7 @@ const getCategory = (task) => {
 
   return Promise.all([restaurant(task), book(task), movie(task)])
   .then((results) => {
-    console.log('getCat results:', results)
+    // console.log('getCat results:', results)
     if (results[0]) {
       return 'restaurants'
     }
@@ -174,10 +173,13 @@ const getCategory = (task) => {
 }
 
 app.post('/todos', (req, res) => {
-  const task = req.body.task;
+  const task = req.body.text;
+  // console.log(req.body.text)
+  // console.log(getCategory(req.body.task))
 
   getCategory(task).then(data => {
-    console.log(data)
+    // console.log(data)
+
     res.send(data)
   }) // it sends the first result that returns true
 

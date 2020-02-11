@@ -35,8 +35,24 @@ const loadToDo = () => {
   })
 }
 
+
 loadToDo();
 
+
+const postToDo = () => {
+  $.ajax({
+    url: '/todos',  
+    method: 'POST',
+    dataType: 'text',
+    success: (post) => {
+      console.log(post);
+      renderToDo(post);
+    }
+  })
+}
+
+// loadToDo();
+// postToDo();
 
 
 // module.exports = { getCategory, createToDoElement, renderToDo, loadToDo };
