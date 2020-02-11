@@ -4,12 +4,21 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Smart To-Do List</title>
-<!-- Font Styles -->
-<link href="https://fonts.googleapis.com/css?family=Luckiest+Guy&display=swap" rel="stylesheet">
+
+    <!-- Font Styles -->
+    <link href="https://fonts.googleapis.com/css?family=Luckiest+Guy&display=swap" rel="stylesheet">
 
     <!-- CSS Styles -->
     <link rel="stylesheet" type="text/css" href="/styles/style.css" />
     <link rel="stylesheet" type="text/css" href="/styles/nav.css" />
+
+    <!-- Vendor JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
+    <!-- app JS -->
+    <script src="/scripts/helpers.js"></script>
+    <script src="/scripts/app.js"></script>
+
   </head>
 
   <!-- Top nav bar (fixed) -->
@@ -33,14 +42,14 @@
   <!-- main container with categories and lists -->
   <div class="container">
     <div class="row">
-      <div class="col-sm">
+      <div class="col-sm" id="to-eat">
         <div class="card" style="width: 14rem;">
           <img src="https://image.flaticon.com/icons/svg/481/481637.svg" class="card-img-top" alt="avatar" />
           <div class="card-body">
             <h5 class="card-title text-center">To Eat</h5>
           </div>
           <form class="task-container">
-            <input class="checkbox" type="checkbox"> 
+            <input class="checkbox" type="checkbox">
             <span class="task-item">Arby's</span> </form>
           <ul class="list-group list-group-flush">
             <div id="eat" class="eat-container list-group-item"></div>
@@ -48,7 +57,7 @@
         </div>
       </div>
       <!-- To Read Category -->
-      <div class="col-sm">
+      <div class="col-sm" id="to-read">
           <div class="card" style="width: 14rem;">
             <img src="https://image.flaticon.com/icons/svg/864/864685.svg" class="card-img-top" alt="avatar" />
             <div class="card-body">
@@ -64,7 +73,7 @@
           </div>
         </div>
         <!-- To Watch Category -->
-        <div class="col-sm">
+        <div class="col-sm" id="to-watch">
             <div class="card" style="width: 14rem;">
               <img src="https://image.flaticon.com/icons/svg/633/633600.svg" class="card-img-top" alt="avatar" />
               <div class="card-body">
@@ -80,7 +89,7 @@
             </div>
           </div>
           <!-- To Buy Category -->
-          <div class="col-sm">
+          <div class="col-sm" id="to-buy">
               <div class="card" style="width: 14rem;">
                 <img src="https://image.flaticon.com/icons/svg/1019/1019709.svg" class="card-img-top" alt="avatar" />
                 <div class="card-body">
@@ -88,7 +97,7 @@
                 </div>
                 <form class="task-container">
                   <input class="checkbox" type="checkbox">
-                  <span class="task-item">Toilet paper</span> 
+                  <span class="task-item">Toilet paper</span>
                 </form>
                 <ul class="list-group list-group-flush">
                   <div id="buy" class="buy-container list-group-item"></div>

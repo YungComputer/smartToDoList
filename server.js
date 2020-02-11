@@ -81,7 +81,7 @@ const tasks = {
     title: "searching movies",
     IsDone: true,
     category: "movies",
-    userId: 3
+    userId: 2
   }
 };
 
@@ -113,66 +113,45 @@ app.get('/login/:id', (req, res) => {
 });
 
 
-const getTaskCategory = (taskTitle) => {
-  return 'books';
-};
-
 const getTasksOfUser = (userId) => {
+  userId = Number(userId);
   const userTasks = [];
-  for (let task in tasks) {
-    if  (task.userId === userId) {
-      tasks.push(task);
+  for (let taskId in tasks) {
+    const task = tasks[taskId];
+    if (task.userId === userId) {
+      userTasks.push(task);
     }
-  } m
+  } 
   return userTasks;
 };
 
-app.get("/tasks", (req, res) => {
-  const userId = req.session.userId;
-  if (userId) {
-    const userTasks = getTasksOfUser(userId);
-    let tempVars = {
-      'user': userId
-    };
-    res.render("index", tempVars);
-  } else {
-    res.send("Not Logged In");
-  }
-});
+// app.get("/tasks", (req, res) => {
+//   const userId = req.session.userId;
+//   if (userId) {
+//     const userTasks = getTasksOfUser(userId);
+//     let tempVars = {
+//       'user': userId
+//     };
+//     res.render("index", tempVars);
+//   } else {
+//     res.send("Not Logged In");
+//   }
+// });
+
 
 // testing that it returns json object
 app.get("/tasksAsJson", (req, res) => {
   const userId = req.session.userId;
   if (userId) {
     const userTasks = getTasksOfUser(userId);
+    console.log(userId);
+    console.log(userTasks);
+    res.json(userTasks);
     // res.json(userTasks); ????
   } else {
     res.send("Not Logged In");
   }
 });
-
-// app.get("/test", (req, res)=>{
-//   console.log("we are in the test");
-// })
-
-// // added /index/:id
-// app.get("/index/:id", (req, res) => {
-//   res.render("index");
-// });
-
-// // added get /tasks/:id
-// app.get("/tasks/:id", (req, res) => {
-//   res.render("index");
-// });
-
-
-// // POSTS
-
-// // added post/tasks
-// app.post("/tasks", (req, res) => {
-//   res.render("index");
-// });
-
 
 
 // Categorizes the task.  Promise.all returns an arrive of defined values.
@@ -192,15 +171,18 @@ const getCategory = (task) => {
     }
     return 'products'
   })
-
 }
 
 app.post('/todos', (req, res) => {
-  // console.log(req.body.task)
-  // console.log(getCategory(req.body.task))
+  const task = req.body.task;
 
-  getCategory(req.body.task).then(data => {
+  getCategory(task).then(data => {
     console.log(data)
-    res.send(data)}) // it sends the first result that returns true
+    res.send(data)
+  }) // it sends the first result that returns true
 
+})
+
+app.get('/', (req,res) => {
+  res.render('index')
 })

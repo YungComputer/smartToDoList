@@ -1,7 +1,7 @@
 
 // Appends all the data together for the to do list.
 const createToDoElement = function(todo) { // The argument is the task the user inputs.
-  let $checkBox = $('<input>').addclass('checkbox')
+  let $checkBox = $('<input>').addClass('checkbox')
   let $todo = $('<span>').addClass('task-item'); // Not sure what elements/ids/classes are being used yet
   $checkBox.append($todo);
 
@@ -10,8 +10,9 @@ const createToDoElement = function(todo) { // The argument is the task the user 
 
 // Renders the data to display the todo box.
 const renderToDo = function(todos) {
+  const $todos = $('.task-container'); // Have to figure out the element/id/class
+  // before adding all the new tasks in, maybe clear out all the existing ones?
   todos.forEach((todo) => {
-    const $todos = $('.task-container'); // Have to figure out the element/id/class
     const $form = createToDoElement(todo);
     $todos.append($form);
   });
@@ -24,10 +25,18 @@ const loadToDo = () => {
     url: '/tasksAsJson',  // what is the route we need?
     method: 'GET',
     dataType: 'JSON',
-    success: (post) => {
-      renderToDo(post);
+    success: (result) => {
+      console.log(result);
+      renderToDo(result);
+    },
+    error: (jqxhr, status, err) => {
+      console.error("holy shit", status, err);
     }
   })
 }
 
-module.exports = { getCategory, createToDoElement, renderToDo, loadToDo };
+loadToDo();
+
+
+
+// module.exports = { getCategory, createToDoElement, renderToDo, loadToDo };

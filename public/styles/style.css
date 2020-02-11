@@ -1,0 +1,62 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Luckiest Guy';
+}
+
+.new-task {
+display: flex;
+justify-content: center;
+margin-bottom: 10px;
+}
+
+textarea {
+  width: 250px;
+}
+
+input[type=submit] {
+  margin-left: 10px;
+  color: white;
+  background-color: #1dbbbb;
+  border-radius: 25px;
+}
+
+h5 {
+  font-size: large;
+  border-bottom: 5px solid black;
+}
+
+.row {
+  display: flex;
+  justify-content: space-around;
+}
+
+Clear floats after the columns */ row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Style the counter cards */
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
+  padding: 16px;
+  transition: 0.3s;
+  text-align: center;
+  background-color: #e9e9e9;
+  border-radius: 20px;
+
+}
+
+/* Responsive columns - one column layout (vertical) on small screens */
+@media screen and (max-width: 600px) {
+  .row {
+    width: 100%;
+    display: block;
+  }
+  form {
+    width: 100%;
+  }
+}
