@@ -30,7 +30,6 @@ const createToDoElement = function(todo) { // The argument is the task the user 
 // Renders the data to display the todo box.
 const renderToDo = function(todos, category) {
 
-
   const $todos = $(`.${category}`);
   const $form = createToDoElement(todos)
   $todos.append($form);
@@ -46,9 +45,6 @@ const loadToDo = (category) => {
     method: 'GET',
     dataType: 'JSON',
     success: (result) => {
-      // console.log('loadToDo results:', result[0].title);
-      console.log('inside the get request of loadtodo')
-      console.log(result[0])
       renderToDo(result[0].title, category);
     },
     error: (jqxhr, status, err) => {
@@ -65,22 +61,14 @@ const loadToDo = (category) => {
   console.log($btn)
 
   $("#submit-btn").on("click", event => {
-    // look for the element Clare uses
     event.preventDefault();
-    // const textField = $("textarea").val();
-    // console.log("User textarea input:", textField);
-    // console.log('serialize me:', $("textarea").serialize())
 
-
-    console.log('before the post')
     $.ajax({
       url: "/todos",
       method: "POST",
       data: $("#task-form").serialize()
     })
       .done(category => {
-        console.log('inside the post response')
-        console.log(category)
         $("textarea").val(""); // empties the text area
         loadToDo(category);
       })

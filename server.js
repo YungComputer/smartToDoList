@@ -143,8 +143,6 @@ app.get("/tasksAsJson", (req, res) => {
   const userId = req.session.userId;
   if (userId) {
     const userTasks = getTasksOfUser(userId);
-    // console.log('this is the user ID:', userId);
-    // console.log('this is the user Tasks:', userTasks);
     res.json(userTasks);
     // res.json(userTasks); ????
   } else {
