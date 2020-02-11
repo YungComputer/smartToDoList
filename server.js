@@ -124,7 +124,7 @@ const getTasksOfUser = (userId) => {
   return userTasks;
 };
 
-app.get("/tasks", (req, res) => {/
+app.get("/tasks", (req, res) => {
   const userId = req.session.userId;
   if (userId) {
     const userTasks = getTasksOfUser(userId);
