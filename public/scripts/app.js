@@ -21,8 +21,10 @@ const createToDoElement = function(todo) { // The argument is the task the user 
 
   let $form = $('<form>').addClass('task-container')
   let $checkBox = $('<input type="checkbox">').addClass('checkbox')
-  let $todo = $('<span>').addClass('task-item').text(todo); // Not sure what elements/ids/classes are being used yet
-  $form.append($checkBox, $todo);
+  let $todo = $('<span>').addClass('task-item').text(todo);
+  let $edit = $('<button type="submit">').addClass("btn btn-outline-primary").text("Edit");
+   // Not sure what elements/ids/classes are being used yet
+  $form.append($checkBox, $todo, $edit);
 
   return $form;
 };
