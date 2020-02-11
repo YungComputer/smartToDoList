@@ -85,17 +85,17 @@ const tasks = {
 // Home page
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
-app.get("/", (req, res) => {
-  let userId = req.session.userId;
-  if (userId) {
-    let tempVars = {
-      'user': userId
-    };
-    res.render("index", tempVars);
-  } else {
-    res.send("Not Logged In");
-  }
-});
+// app.get("/", (req, res) => {
+//   let userId = req.session.userId;
+//   if (userId) {
+//     let tempVars = {
+//       'user': userId
+//     };
+//     res.render("index", tempVars);
+//   } else {
+//     res.send("Not Logged In");
+//   }
+// });
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
@@ -103,39 +103,39 @@ app.listen(PORT, () => {
 
 // Gets
 
-app.get('/login/:id', (req, res) => {
-  const userId = req.params.id;
-  req.session.userId = userId;
-  res.redirect('/');
-});
+// app.get('/login/:id', (req, res) => {
+//   const userId = req.params.id;
+//   req.session.userId = userId;
+//   res.redirect('/');
+// });
 
 
-const getTaskCategory = (taskTitle) => {
-  return 'books';
-};
+// const getTaskCategory = (taskTitle) => {
+//   return 'books';
+// };
 
-const getTasksOfUser = (userId) => {
-  const userTasks = [];
-  for (let task in tasks) {
-    if  (task.userId === userId) {
-      tasks.push(task);
-    }
-  } m
-  return userTasks;
-};
+// const getTasksOfUser = (userId) => {
+//   const userTasks = [];
+//   for (let task in tasks) {
+//     if  (task.userId === userId) {
+//       tasks.push(task);
+//     }
+//   } m
+//   return userTasks;
+// };
 
-app.get("/tasks", (req, res) => {
-  const userId = req.session.userId;
-  if (userId) {
-    const userTasks = getTasksOfUser(userId);
-    let tempVars = {
-      'user': userId
-    };
-    res.render("index", tempVars);
-  } else {
-    res.send("Not Logged In");
-  }
-});
+// app.get("/tasks", (req, res) => {
+//   const userId = req.session.userId;
+//   if (userId) {
+//     const userTasks = getTasksOfUser(userId);
+//     let tempVars = {
+//       'user': userId
+//     };
+//     res.render("index", tempVars);
+//   } else {
+//     res.send("Not Logged In");
+//   }
+// });
 
 // app.get("/test", (req, res)=>{
 //   console.log("we are in the test");
@@ -187,6 +187,11 @@ app.post('/todos', (req, res) => {
 
   getCategory(req.body.task).then(data => {
     console.log(data)
-    res.send(data)}) // it sends the first result that returns true
+    res.send(data)
+  }) // it sends the first result that returns true
 
+})
+
+app.get('/', (req,res) => {
+  res.render('index')
 })
