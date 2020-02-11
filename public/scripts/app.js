@@ -39,7 +39,6 @@ const renderToDo = function(todos, category) {
 
 const loadToDo = (category) => {
 
-  console.log('inside the loadtodo, before get request')
   $.ajax({
     url: '/tasksAsJson',  // what is the route we need?
     method: 'GET',
@@ -57,8 +56,6 @@ const loadToDo = (category) => {
   // loadToDo(); // this is to auto populate data from our DB for the starting page.
 
   // when form gets submitted this should run.
-  const $btn = $("#submit-btn")
-  console.log($btn)
 
   $("#submit-btn").on("click", event => {
     event.preventDefault();
