@@ -120,7 +120,7 @@ const getTasksOfUser = (userId) => {
     if (task.userId === userId) {
       userTasks.push(task);
     }
-  } 
+  }
   return userTasks;
 };
 
@@ -143,8 +143,8 @@ app.get("/tasksAsJson", (req, res) => {
   const userId = req.session.userId;
   if (userId) {
     const userTasks = getTasksOfUser(userId);
-    console.log(userId);
-    console.log(userTasks);
+    console.log('this is the user ID:', userId);
+    console.log('this is the user Tasks:', userTasks);
     res.json(userTasks);
     // res.json(userTasks); ????
   } else {
@@ -189,7 +189,7 @@ app.post('/todos', (req, res) => {
     }
     res.send(category)
   });
-    
+
 });
 
 
