@@ -12,11 +12,7 @@
   margin-bottom: inherit;
 }
 .nav-title {
-<<<<<<< HEAD
-  font-size: larger;
-=======
   font-size: xx-large;
->>>>>>> master
 }
 
 @media screen and (max-width: 600px) {
