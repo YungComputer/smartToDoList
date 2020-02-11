@@ -81,7 +81,7 @@ const tasks = {
     title: "searching movies",
     IsDone: true,
     category: "movies",
-    userId: 2
+    userId: 3
   }
 };
 
@@ -106,11 +106,11 @@ app.listen(PORT, () => {
 
 // Gets
 
-// app.get('/login/:id', (req, res) => {
-//   const userId = req.params.id;
-//   req.session.userId = userId;
-//   res.redirect('/');
-// });
+app.get('/login/:id', (req, res) => {
+  const userId = req.params.id;
+  req.session.userId = userId;
+  res.redirect('/');
+});
 
 const getTasksOfUser = (userId) => {
   userId = Number(userId);
@@ -174,18 +174,18 @@ const getCategory = (task) => {
 
 app.post('/todos', (req, res) => {
   const taskTitle = req.body.text;
-  // console.log(req.body.text)
-  // console.log(getCategory(req.body.task))
+  const userId = Number(req.session.userId);
 
   getCategory(taskTitle).then(category => {
     // todo: to be replaced with database call
-    const taskId = 6 // need to user random generator
+    // const taskId = 6 // need to user random generator
+    const taskId = Math.floor(Math.random() * 1000000);
     tasks[taskId] = {
       id: taskId,
       title: taskTitle,
       IsDone: false,
       "category": category,
-      userId: 1 // todo: use actual userId
+      "userId": userId
     }
     res.send(category)
   });
