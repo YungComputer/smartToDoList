@@ -77,4 +77,7 @@ const loadToDo = (category) => {
         console.log(err);
       });
   });
+  // $(".done").on('click', function() {
+  //   $(this).closest("span").remove();
+  // })
 });

@@ -8,7 +8,8 @@
 
     <!-- Font Styles -->
     <link href="https://fonts.googleapis.com/css?family=Luckiest+Guy&display=swap" rel="stylesheet">
-    <!-- External JS Scripts -->
+    <!-- External CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
 
     <!-- CSS Styles -->
@@ -16,20 +17,20 @@
     <link rel="stylesheet" type="text/css" href="/styles/nav.css" />
     <link rel="stylesheet" type="text/css" href="/styles/buttons.css" />
 
-    <!-- Vendor JS -->
-    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-
     <script
       src="https://code.jquery.com/jquery-3.4.1.min.js"
       integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
       crossorigin="anonymous"></script>
     <script type="text/javascript" src="/scripts/app.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
 
   </head>
 
   <!-- Top nav bar (fixed) -->
   <nav class="navbar">
-    <span class="nav-title">Smart & Fancy To-Do List</span>
+    <span class="nav-title">Smart To-Do List</span>
   </nav>
   <body>
       <section class="new-task">
@@ -57,8 +58,14 @@
           <form class="restaurants">
             <input class="checkbox" type="checkbox">
             <span class="task-item">Arby's</span>
-            <button type="submit"  class="btn btn-outline-primary">Edit</button>
-            <button type="button" class="btn btn-outline-success">Done</button>
+                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Move
+                <span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                  <li>To Eat</li>
+                  <li>To Read</li>
+                  <li>To Watch</li>
+                  <li>To Buy</li>
+                </ul>
           </form>
           <ul class="list-group list-group-flush">
             <div id="eat" class="eat-container list-group-item"></div>
@@ -75,8 +82,14 @@
             <form class="books">
               <input class="checkbox" type="checkbox">
               <span class="task-item">The Hobbit</span>
-              <button type="submit"  class="btn btn-outline-primary">Edit</button>
-              <button type="button" class="btn btn-outline-success">Done</button>
+              <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Move
+                  <span class="caret"></span></button>
+                  <ul class="dropdown-menu">
+                    <li>To Eat</li>
+                    <li>To Read</li>
+                    <li>To Watch</li>
+                    <li>To Buy</li>
+                  </ul>
             </form>
             <ul class="list-group list-group-flush">
               <div id="read" class="read-container list-group-item"></div>
@@ -93,8 +106,14 @@
               <form class="movies">
                 <input class="checkbox" type="checkbox">
                 <span class="task-item">Interstellar</span>
-                <button type="submit"  class="btn btn-outline-primary">Edit</button>
-                <button type="button" class="btn btn-outline-success">Done</button>
+                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Move
+                    <span class="caret"></span></button>
+                    <ul class="dropdown-menu">
+                      <li>To Eat</li>
+                      <li>To Read</li>
+                      <li>To Watch</li>
+                      <li>To Buy</li>
+                    </ul>
               </form>
               <ul class="list-group list-group-flush">
                 <div id="watch" class="watch-container list-group-item"></div>
@@ -111,8 +130,14 @@
                 <form class="products">
                   <input class="checkbox" type="checkbox">
                   <span class="task-item">Toilet paper</span>
-                  <button type="submit"  class="btn btn-outline-primary">Edit</button>
-                  <button type="button" class="btn btn-outline-success">Done</button>
+                  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Move
+                      <span class="caret"></span></button>
+                      <ul class="dropdown-menu">
+                        <li>To Eat</li>
+                        <li>To Read</li>
+                        <li>To Watch</li>
+                        <li>To Buy</li>
+                      </ul>
                 </form>
                 <ul class="list-group list-group-flush">
                   <div id="buy" class="buy-container list-group-item"></div>
