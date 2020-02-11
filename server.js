@@ -129,9 +129,7 @@ app.get("/tasks", (req, res) => {/
   if (userId) {
     const userTasks = getTasksOfUser(userId);
     let tempVars = {
-      'user': userId,
-      // 'tasks': userTasks
-      'taskTitle': JSON.stringify(JSONObj	7  	);
+      'user': userId
     };
     res.render("index", tempVars);
   } else {
