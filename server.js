@@ -173,17 +173,26 @@ const getCategory = (task) => {
 }
 
 app.post('/todos', (req, res) => {
-  const task = req.body.text;
+  const taskTitle = req.body.text;
   // console.log(req.body.text)
   // console.log(getCategory(req.body.task))
 
-  getCategory(task).then(data => {
-    // console.log(data)
+  getCategory(taskTitle).then(category => {
+    // todo: to be replaced with database call
+    const taskId = 6 // need to user random generator
+    tasks[taskId] = {
+      id: taskId,
+      title: taskTitle,
+      IsDone: false,
+      "category": category,
+      userId: 1 // todo: use actual userId
+    }
+    res.send(category)
+  });
+    
+});
 
-    res.send(data)
-  }) // it sends the first result that returns true
 
-})
 
 app.get('/', (req,res) => {
   res.render('index')
