@@ -6,7 +6,7 @@ $(() => {
     url: "/api/users"
   }).done(users => {
     console.log(users, "this is for users");
-    for (user of users) {
+    for (let user of users) {
       $("<div>")
         .text(user.name)
         .appendTo($("body"));
