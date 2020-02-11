@@ -46,6 +46,7 @@ const loadToDo = (category) => {
     method: 'GET',
     dataType: 'JSON',
     success: (result) => {
+      
       renderToDo(result[0].title, category);
     },
     error: (jqxhr, status, err) => {
