@@ -22,41 +22,29 @@ $(document).ready(function() {
     $todos.append($form);
   };
 
-
-
-
-
-    // Renders all the database tasks on user login
-    const renderToDos = function(taskArray) {
-
-
-      taskArray.forEach((task) => {
-        console.log(task)
-      })
-    }
-    // CREATE THE FUNCTIONALITY, ALLOW IT TO POPULATE THE LISTS WITH THE DATABASE INFORMATION BASED ON USER
-
-
-
-
-
+  // Renders all the database tasks on user login
+  const renderToDos = function(taskArray) {
+    taskArray.forEach(task => {
+      console.log(task);
+    });
+  };
+  // CREATE THE FUNCTIONALITY, ALLOW IT TO POPULATE THE LISTS WITH THE DATABASE INFORMATION BASED ON USER
 
   // Loads all the data up to be required by a POST.
-const loadToDo = (category) => {
-
-  $.ajax({
-    url: '/tasks',
-    method: 'GET',
-    dataType: 'JSON',
-    success: (result) => {
-      console.log('here is the results on success in loadToDo:', result)
-      renderToDo(result.tasks[0].title, category);
-    },
-    error: (jqxhr, status, err) => {
-      console.error("Error on the lodaToDo function:", status, err);
-    }
-  })
-}
+  const loadToDo = category => {
+    $.ajax({
+      url: "/tasks",
+      method: "GET",
+      dataType: "JSON",
+      success: result => {
+        console.log("here is the results on success in loadToDo:", result);
+        renderToDo(result.tasks[0].title, category);
+      },
+      error: (jqxhr, status, err) => {
+        console.error("Error on the lodaToDo function:", status, err);
+      }
+    });
+  };
 
   loadToDo(); // this is to auto populate data from our DB for the starting page.
 
@@ -106,4 +94,3 @@ const loadToDo = (category) => {
     });
   });
 });
-
