@@ -1,27 +1,11 @@
-
-
-// $(() => {
-//   $.ajax({
-//     method: "GET",
-//     url: "/api/users"
-//   }).done(users => {
-//     console.log(users, "this is for users");
-//     for (let user of users) {
-//       $("<div>")
-//         .text(user.name)
-//         .appendTo($("body"));
-//     }
-//   });
-// });
-
 $(document).ready(function () {
 
 // Appends all the data together for the to do list.
-const createToDoElement = function(todoTitle) { // The argument is the task the user inputs.
+const createToDoElement = function(todoTitle) {
 
-  let $form = $('<form>').addClass('task-container')
-  let $checkBox = $('<input type="checkbox">').addClass('checkbox')
-  let $todo = $('<span>').addClass('task-item').text(todoTitle); // Not sure what elements/ids/classes are being used yet
+  let $form = $('<form>').addClass('task-container');
+  let $checkBox = $('<input type="checkbox">').addClass('checkbox');
+  let $todo = $('<span>').addClass('task-item').text(todoTitle);
   $form.append($checkBox, $todo);
 
   return $form;
@@ -31,20 +15,29 @@ const createToDoElement = function(todoTitle) { // The argument is the task the 
 const renderToDo = function(todoTitle, category) {
 
   const $todos = $(`.${category}`);
-  const $form = createToDoElement(todoTitle)
+  const $form = createToDoElement(todoTitle);
   $todos.append($form);
 };
 
-// Loads all the data up to be required by a POST.
 
+
+
+  // Renders all the database tasks on user login
+  const renderToDos = function(takesinfunction) {
+
+  } // CREATE THE FUNCTIONALITY, ALLOW IT TO POPULATE THE LISTS WITH THE DATABASE INFORMATION BASED ON USER
+
+
+
+
+// Loads all the data up to be required by a POST.
 const loadToDo = (category) => {
 
   $.ajax({
-    url: '/tasks',  // what is the route we need?
+    url: '/tasks',
     method: 'GET',
     dataType: 'JSON',
     success: (result) => {
-      console.log(result.tasks[0])
       renderToDo(result.tasks[0].title, category);
     },
     error: (jqxhr, status, err) => {
@@ -57,11 +50,8 @@ const loadToDo = (category) => {
   loadToDo(); // this is to auto populate data from our DB for the starting page.
 
   // when form gets submitted this should run.
-
   $("#submit-btn").on("click", event => {
     event.preventDefault();
-
-    console.log('before the ajax call')
 
     $.ajax({
       url: "/todos",
@@ -69,7 +59,6 @@ const loadToDo = (category) => {
       data: $("#task-form").serialize()
     })
       .done(response => {
-        console.log('on the done part:', response)
         $("textarea").val(""); // empties the text area
         renderToDo(response.task_title, response.task_category);
       })
