@@ -1,12 +1,10 @@
 DROP TABLE IF EXISTS tasks CASCADE;
 DROP TABLE IF EXISTS widgets CASCADE;
 CREATE TABLE tasks (
-  id SERIAL PRIMARY KEY NOT NULL,
+  id SERIAL PRIMARY KEY,
   user_id INTEGER REFERENCES users(id),
-  task_title VARCHAR(255) NOT NULL,
-  due_date DATE,
-  priority SMALLINT,
-  task_category VARCHAR(255),
-  is_complete BOOLEAN DEFAULT FALSE
+  title VARCHAR(255) NOT NULL,
+  category VARCHAR(255),
+  is_done BOOLEAN DEFAULT FALSE
 );
 

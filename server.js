@@ -53,11 +53,13 @@ app.use(cookieSession({
 // Note: Feel free to replace the example routes below with your own
 const usersRoutes = require("./routes/users");
 const widgetsRoutes = require("./routes/widgets");
+const tasksRoutes = require("./routes/tasks");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 app.use("/api/users", usersRoutes(db));
 app.use("/api/widgets", widgetsRoutes(db));
+app.use("/api/tasks", tasksRoutes(db));
 // Note: mount other resources here, using the same pattern above
 
 // sample data
@@ -124,32 +126,6 @@ const getTasksOfUser = (userId) => {
   return userTasks;
 };
 
-// app.get("/tasks", (req, res) => {
-//   const userId = req.session.userId;
-//   if (userId) {
-//     const userTasks = getTasksOfUser(userId);
-//     let tempVars = {
-//       'user': userId
-//     };
-//     res.render("index", tempVars);
-//   } else {
-//     res.send("Not Logged In");
-//   }
-// });
-
-
-// testing that it returns json object
-app.get("/tasksAsJson", (req, res) => {
-  const userId = req.session.userId;
-  if (userId) {
-    const userTasks = getTasksOfUser(userId);
-    res.json(userTasks);
-    // res.json(userTasks); ????
-  } else {
-    res.send("Not Logged In");
-  }
-});
-
 
 // Categorizes the task.  Promise.all returns an arrive of defined values.
 const getCategory = (task) => {
@@ -187,11 +163,66 @@ app.post('/todos', (req, res) => {
     }
     res.send(category)
   });
-
 });
 
 
 
+app.put('/tasks/:id', (req, res) => {
+  const taskTitle = req.body.text;
+  const userId = Number(req.session.userId);
+
+  getCategory(taskTitle).then(category => {
+    // todo: to be replaced with database call
+    // const taskId = 6 // need to user random generator
+    const taskId = Math.floor(Math.random() * 1000000);
+    tasks[taskId] = {
+      id: taskId,
+      title: taskTitle,
+      IsDone: false,
+      "category": category,
+      "userId": userId
+    }
+    res.send(category)
+  });
+});
+
+//Edit. Delete
+// helper function for API, regex 
+// finalizing database branch
+
+// app.get("/tasks/:id/Edit", (req, res) => {
+//   const userId = req.session.userId;
+//   if (userId) {
+//     const userTasks = 
+//   }
+// })
+
+module.exports = () => {
+  router.post("/", (req, res) => {
+    req.session.userId = req.body.loginId
+    res.redirect("/");
+  });
+  return router;
+};
+
+// router.post("/"), (req, res) => {
+//   req.session.userId = req.body.loginId;
+//   res.redicret("/");
+// }
+// testing that it returns json object
+app.get("/tasksAsJson", (req, res) => {
+  const userId = req.session.userId;
+  if (userId) {
+    const userTasks = getTasksOfUser(userId);
+    res.json(userTasks);
+    // res.json(userTasks); ????
+  } else {
+    res.send("Not Logged In");
+  }
+});
+
 app.get('/', (req,res) => {
   res.render('index')
 })
+
+
