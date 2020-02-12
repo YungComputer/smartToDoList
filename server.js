@@ -13,10 +13,9 @@ const morgan     = require('morgan');
 
 // PG database client/connection setup
 const { Pool } = require('pg');
-const dbParams = require('./lib/db.js');
+const { dbParams, addTask } = require('./lib/db.js');
 const db = new Pool(dbParams);
 db.connect();
-
 
 // API function checks
 const { restaurant } = require('./apis/yelpLibrary');
@@ -52,37 +51,37 @@ app.use(cookieSession({
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
 const usersRoutes = require("./routes/users");
-const widgetsRoutes = require("./routes/widgets");
+const tasksRoutes = require("./routes/tasks");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
-app.use("/api/users", usersRoutes(db));
-app.use("/api/widgets", widgetsRoutes(db));
+app.use("/users", usersRoutes(db));
+app.use("/tasks", tasksRoutes(db));
 // Note: mount other resources here, using the same pattern above
 
 // sample data
 const tasks = {
-  "taskRandomID": {
-    id: "userRandomID",
-    title: "searching food",
-    IsDone: true,
-    category: "food",
-    userId: 1
-  },
-  "task2RandomID": {
-    id: "user2RandomID",
-    title: "searching books",
-    IsDone: false,
-    category: "books",
-    userId: 2
-  },
-  "task3RandomID": {
-    id: "user3RandomID",
-    title: "searching movies",
-    IsDone: true,
-    category: "movies",
-    userId: 3
-  }
+  // "taskRandomID": {
+  //   id: "userRandomID",
+  //   title: "searching food",
+  //   IsDone: true,
+  //   category: "food",
+  //   userId: 1
+  // },
+  // "task2RandomID": {
+  //   id: "user2RandomID",
+  //   title: "searching books",
+  //   IsDone: false,
+  //   category: "books",
+  //   userId: 2
+  // },
+  // "task3RandomID": {
+  //   id: "user3RandomID",
+  //   title: "searching movies",
+  //   IsDone: true,
+  //   category: "movies",
+  //   userId: 3
+  // }
 };
 
 // Home page
@@ -175,17 +174,28 @@ app.post('/todos', (req, res) => {
   const userId = Number(req.session.userId);
 
   getCategory(taskTitle).then(category => {
+    addTask({
+      user_id: userId,
+      task_title: taskTitle,
+      task_category: category,
+    })
+    .then((response) => {
+      // console.log(response[0].task_category)
+      res.send(response[0])
+    })
+
+
+
     // todo: to be replaced with database call
     // const taskId = 6 // need to user random generator
-    const taskId = Math.floor(Math.random() * 1000000);
-    tasks[taskId] = {
-      id: taskId,
-      title: taskTitle,
-      IsDone: false,
-      "category": category,
-      "userId": userId
-    }
-    res.send(category)
+    // const taskId = Math.floor(Math.random() * 1000000);
+    // tasks[taskId] = {
+    //   id: taskId,
+    //   title: taskTitle,
+    //   IsDone: false,
+    //   "category": category,
+    //   "userId": userId
+    // }
   });
 
 });

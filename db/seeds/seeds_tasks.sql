@@ -1,4 +1,5 @@
-INSERT INTO tasks (task_title, due_date, priority, task_category) VALUES ('The Alchemist', '2020-03-31', 5, 'To Read'),
-('MeeT in Gastown', '2020-02-14', 3, 'To Eat'),
-('Fantastic Fungi', '2020-05-31', 6, 'To Watch'),
-('Toilet Paper', '2020-02-22', 1, 'To Buy');
+INSERT INTO tasks (user_id, task_title, task_category)
+VALUES (1, 'The Alchemist', 'books'),
+(2, 'MeeT in Gastown', 'restaurants'),
+(2, 'Fantastic Fungi', 'movies'),
+(1, 'Toilet Paper', 'products');

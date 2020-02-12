@@ -10,7 +10,9 @@ const router  = express.Router();
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
-    db.query(`SELECT * FROM users;`)
+    const query = `SELECT * FROM users;`
+
+    db.query(query)
       .then(data => {
         const users = data.rows;
         res.json({ users });
