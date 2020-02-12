@@ -23,9 +23,8 @@ $(document).ready(function() {
     let $todo = $("<span>")
       .addClass("task-item")
       .text(todo);
-     //Clone of the dropdown menu
+    //Clone of the dropdown menu
     $form.append($checkBox, $todo, $(dropdown));
-
 
     return $form;
   };
@@ -39,7 +38,7 @@ $(document).ready(function() {
 
   // Loads all the data up to be required by a POST.
 
-  const loadToDo = (category) => {
+  const loadToDo = category => {
     $.ajax({
       url: "/tasksAsJson", // what is the route we need?
       method: "GET",
@@ -74,35 +73,31 @@ $(document).ready(function() {
       });
   });
 
-
-  // $(".thing").on('click', e => {})
-
-  // $(".some-container").on('click', '.thing',   e => {})
-
-;[['.edit-read', 'books'], ['.edit-eat', 'restaurants'], ['.edit-watch', 'movies'], ['edit-buy', 'products']].forEach(spec => {
-  let className = spec[0];
-  let catName = spec[1];
-
-  let [className, catName] = spec;
   //Change Category
-  $(className).on("click", event => {
-    event.preventDefault();
 
-    $.ajax({
-      url: "/todos",
-      method: "POST",
-      data: $(className).closest("span")
-    })
-      .done(category => {
-        $("textarea").val(""); // empties the text area
-        loadToDo(catName);
+  [
+    [".edit-read", "books"],
+    [".edit-eat", "restaurants"],
+    [".edit-watch", "movies"],
+    ["edit-buy", "products"]
+  ].forEach(spec => {
+    let [className, catName] = spec;
+
+    $(className).on("click", event => {
+      event.preventDefault();
+
+      $.ajax({
+        url: "/todos",
+        method: "POST",
+        data: $(className).closest("span")
       })
-      .fail(err => {
-        console.log(err);
-      });
+        .done(category => {
+          $("textarea").val(""); // empties the text area
+          loadToDo(catName);
+        })
+        .fail(err => {
+          console.log(err);
+        });
+    });
   });
-})
-
-
-
 });
