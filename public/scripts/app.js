@@ -51,7 +51,11 @@ $(document).ready(function() {
   // when form gets submitted this should run.
   $("#submit-btn").on("click", event => {
     event.preventDefault();
-
+    if($("textarea").val().trim().length < 1)
+{
+    alert("Please Enter Text...");
+    return; 
+} else {
     $.ajax({
       url: "/todos",
       method: "POST",
@@ -64,7 +68,9 @@ $(document).ready(function() {
       .fail(err => {
         console.log(err);
       });
-  });
+  }
+});
+
 
   //Change Category
 
