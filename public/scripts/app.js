@@ -1,39 +1,47 @@
-$(document).ready(function () {
+$(document).ready(function() {
+  let dropdown = $("#move-dropdown").html();
+  // Appends all the data together for the to do list.
+  const createToDoElement = function(todo) {
+    // The argument is the task the user inputs.
 
-// Appends all the data together for the to do list.
-const createToDoElement = function(todoTitle) {
-  let $form = $('<form>').addClass('task-container');
-  let $checkBox = $('<input type="checkbox">').addClass('checkbox');
-  let $todo = $('<span>').addClass('task-item').text(todoTitle);
-  $form.append($checkBox, $todo);
+    let $form = $("<form>").addClass("task-container");
+    let $checkBox = $('<input type="checkbox">').addClass("checkbox");
+    let $todo = $("<span>")
+      .addClass("task-item")
+      .text(todo);
+    //Clone of the dropdown menu
+    $form.append($checkBox, $todo, $(dropdown));
 
-  return $form;
-};
+    return $form;
+  };
 
-// Renders the data to display the todo box.
-const renderToDo = function(todoTitle, category) {
-  const $todos = $(`.${category}`);
-  const $form = createToDoElement(todoTitle);
-  $todos.append($form);
-};
-
-
-
-
-  // Renders all the database tasks on user login
-  const renderToDos = function(taskArray) {
-
-
-    taskArray.forEach((task) => {
-      console.log(task)
-    })
-  }
-  // CREATE THE FUNCTIONALITY, ALLOW IT TO POPULATE THE LISTS WITH THE DATABASE INFORMATION BASED ON USER
+  // Renders the data to display the todo box.
+  const renderToDo = function(todoTitle, category) {
+    const $todos = $(`.${category}`);
+    const $form = createToDoElement(todoTitle);
+    $todos.append($form);
+  };
 
 
 
 
-// Loads all the data up to be required by a POST.
+
+    // Renders all the database tasks on user login
+    const renderToDos = function(taskArray) {
+
+
+      taskArray.forEach((task) => {
+        console.log(task)
+      })
+    }
+    // CREATE THE FUNCTIONALITY, ALLOW IT TO POPULATE THE LISTS WITH THE DATABASE INFORMATION BASED ON USER
+
+
+
+
+
+
+  // Loads all the data up to be required by a POST.
 const loadToDo = (category) => {
 
   $.ajax({
@@ -49,7 +57,6 @@ const loadToDo = (category) => {
     }
   })
 }
-
 
   loadToDo(); // this is to auto populate data from our DB for the starting page.
 
@@ -71,4 +78,32 @@ const loadToDo = (category) => {
       });
   });
 
+  //Change Category
+
+  ;[
+    [".edit-read", "books"],
+    [".edit-eat", "restaurants"],
+    [".edit-watch", "movies"],
+    ["edit-buy", "products"]
+  ].forEach(spec => {
+    let [className, catName] = spec;
+
+    $(className).on("click", event => {
+      event.preventDefault();
+
+      $.ajax({
+        url: "/todos",
+        method: "POST",
+        data: $(className).closest("span")
+      })
+        .done(category => {
+          $("textarea").val(""); // empties the text area
+          loadToDo(catName);
+        })
+        .fail(err => {
+          console.log(err);
+        });
+    });
+  });
 });
+
