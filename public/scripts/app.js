@@ -22,10 +22,9 @@ $(document).ready(function() {
     let $todo = $("<span>")
       .addClass("task-item")
       .text(todo);
-    let $edit = $('<button>')
-      .addClass("btn btn-primary dropdown-toggle")
-      .text("Move")
-    $form.append($checkBox, $todo, $edit);
+    let $dropdown = $(".move-dropdown").clone(); //Clone of the dropdown menu
+    $form.append($checkBox, $todo, $dropdown);
+
 
     return $form;
   };
