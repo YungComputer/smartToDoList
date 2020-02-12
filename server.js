@@ -146,6 +146,7 @@ const getCategory = (task) => {
   })
 }
 
+// POST /todos
 app.post('/todos', (req, res) => {
   const taskTitle = req.body.text;
   const userId = Number(req.session.userId);
@@ -220,6 +221,7 @@ app.get("/tasksAsJson", (req, res) => {
     res.send("Not Logged In");
   }
 });
+
 
 app.get('/', (req,res) => {
   res.render('index')
