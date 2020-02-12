@@ -75,6 +75,9 @@ Clear floats after the columns */ row:after {
   border-color: #1dbbbb;
   border-radius: 20px;
 }
+.card-body {
+  padding-bottom: 5px;
+}
 
 /* Responsive columns - one column layout (vertical) on small screens */
 @media screen and (max-width: 600px) {
@@ -85,4 +88,17 @@ Clear floats after the columns */ row:after {
   form {
     width: 100%;
   }
+}
+
+#eat {
+  border-top-width: 0px;
+}
+#read {
+  border-top-width: 0px;
+}
+#watch {
+  border-top-width: 0px;
+}
+#buy {
+  border-top-width: 0px;
 }
