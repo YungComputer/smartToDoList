@@ -1,5 +1,3 @@
-
-
 // $(() => {
 //   $.ajax({
 //     method: "GET",
@@ -14,48 +12,46 @@
 //   });
 // });
 
-$(document).ready(function () {
+$(document).ready(function() {
+  // Appends all the data together for the to do list.
+  const createToDoElement = function(todo) {
+    // The argument is the task the user inputs.
 
-// Appends all the data together for the to do list.
-const createToDoElement = function(todo) { // The argument is the task the user inputs.
+    let $form = $("<form>").addClass("task-container");
+    let $checkBox = $('<input type="checkbox">').addClass("checkbox");
+    let $todo = $("<span>")
+      .addClass("task-item")
+      .text(todo);
+    let $edit = $('<button>')
+      .addClass("btn btn-primary dropdown-toggle")
+      .text("Move")
+    $form.append($checkBox, $todo, $edit);
 
-  let $form = $('<form>').addClass('task-container')
-  let $checkBox = $('<input type="checkbox">').addClass('checkbox')
-  let $todo = $('<span>').addClass('task-item').text(todo);
-  let $edit = $('<button type="submit">').addClass("btn btn-outline-primary").text("Edit");
-  let $done = $('<button type="submit">').addClass("btn btn-outline-success").text("Done");
-   // Not sure what elements/ids/classes are being used yet
-  $form.append($checkBox, $todo, $edit, $done);
+    return $form;
+  };
 
-  return $form;
-};
+  // Renders the data to display the todo box.
+  const renderToDo = function(todos, category) {
+    const $todos = $(`.${category}`);
+    const $form = createToDoElement(todos);
+    $todos.append($form);
+  };
 
-// Renders the data to display the todo box.
-const renderToDo = function(todos, category) {
+  // Loads all the data up to be required by a POST.
 
-  const $todos = $(`.${category}`);
-  const $form = createToDoElement(todos)
-  $todos.append($form);
-};
-
-// Loads all the data up to be required by a POST.
-
-const loadToDo = (category) => {
-
-  $.ajax({
-    url: '/tasksAsJson',  // what is the route we need?
-    method: 'GET',
-    dataType: 'JSON',
-    success: (result) => {
-      
-      renderToDo(result[0].title, category);
-    },
-    error: (jqxhr, status, err) => {
-      console.error("Error on the lodaToDo function:", status, err);
-    }
-  })
-}
-
+  const loadToDo = category => {
+    $.ajax({
+      url: "/tasksAsJson", // what is the route we need?
+      method: "GET",
+      dataType: "JSON",
+      success: result => {
+        renderToDo(result[0].title, category);
+      },
+      error: (jqxhr, status, err) => {
+        console.error("Error on the lodaToDo function:", status, err);
+      }
+    });
+  };
 
   // loadToDo(); // this is to auto populate data from our DB for the starting page.
 
@@ -77,7 +73,22 @@ const loadToDo = (category) => {
         console.log(err);
       });
   });
-  // $(".done").on('click', function() {
-  //   $(this).closest("span").remove();
-  // })
+
+  //Change Category
+  $(".edit-read").on("click", event => {
+    event.preventDefault();
+
+    $.ajax({
+      url: "/todos",
+      method: "POST",
+      data: $(".edit-read").closest("span")
+    })
+      .done(category => {
+        $("textarea").val(""); // empties the text area
+        loadToDo("books");
+      })
+      .fail(err => {
+        console.log(err);
+      });
+  });
 });
