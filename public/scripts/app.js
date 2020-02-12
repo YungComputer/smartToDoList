@@ -52,6 +52,23 @@ const loadToDo = (category) => {
   })
 }
 
+const loadAllToDos = () => {
+  $.ajax({
+    url: '/tasksAsJson',  // what is the route we need?
+    method: 'GET',
+    dataType: 'JSON',
+    success: (results) => {
+      console.log(results);
+      for(let result of results) {
+        renderToDo(result.title, result.category);
+      }
+    },
+    error: (jqxhr, status, err) => {
+      console.error("Error on the lodaToDo function:", status, err);
+    }
+  })
+}
+
 
   // loadToDo(); // this is to auto populate data from our DB for the starting page.
 
@@ -73,4 +90,8 @@ const loadToDo = (category) => {
         console.log(err);
       });
   });
+
+
+  loadAllToDos();
 });
+
