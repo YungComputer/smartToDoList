@@ -75,7 +75,7 @@ $(document).ready(function() {
 
   //Change Category
 
-  [
+  ;[
     [".edit-read", "books"],
     [".edit-eat", "restaurants"],
     [".edit-watch", "movies"],
