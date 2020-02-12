@@ -25,7 +25,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
-
   </head>
 
   <!-- Top nav bar (fixed) -->
@@ -46,6 +45,18 @@
         </section>
   </body>
 
+  <script type="text/template" id="move-dropdown">
+    <span class="move-dropdown">
+        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Move
+            <span class="caret"></span></button>
+            <ul class="dropdown-menu">
+                <a class="dropdown-item edit-eat" href="#">To Eat</a>
+                <a class="dropdown-item edit-read" href="#">To Read</a>
+                <a class="dropdown-item edit-watch" href="#">To Watch</a>
+                <a class="dropdown-item edit-buy" href="#">To Buy</a>
+            </ul>
+    </span> 
+  </script>
   <!-- main container with categories and lists -->
   <div class="container">
     <div class="row">
@@ -62,7 +73,7 @@
                 <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Move
                     <span class="caret"></span></button>
                     <ul class="dropdown-menu">
-                        <a class="dropdown-item edit-read" href="#">To Eat</a>
+                        <a class="dropdown-item edit-eat" href="#">To Eat</a>
                         <a class="dropdown-item edit-read" href="#">To Read</a>
                         <a class="dropdown-item edit-watch" href="#">To Watch</a>
                         <a class="dropdown-item edit-buy" href="#">To Buy</a>
@@ -88,7 +99,7 @@
                   <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Move
                       <span class="caret"></span></button>
                       <ul class="dropdown-menu">
-                          <a class="dropdown-item edit-read" href="#">To Eat</a>
+                          <a class="dropdown-item edit-eat" href="#">To Eat</a>
                           <a class="dropdown-item edit-read" href="#">To Read</a>
                           <a class="dropdown-item edit-watch" href="#">To Watch</a>
                           <a class="dropdown-item edit-buy" href="#">To Buy</a>
@@ -114,7 +125,7 @@
                     <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Move
                         <span class="caret"></span></button>
                         <ul class="dropdown-menu">
-                            <a class="dropdown-item edit-read" href="#">To Eat</a>
+                            <a class="dropdown-item edit-eat" href="#">To Eat</a>
                             <a class="dropdown-item edit-read" href="#">To Read</a>
                             <a class="dropdown-item edit-watch" href="#">To Watch</a>
                             <a class="dropdown-item edit-buy" href="#">To Buy</a>
@@ -140,7 +151,7 @@
                       <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Move
                           <span class="caret"></span></button>
                           <ul class="dropdown-menu">
-                              <a class="dropdown-item edit-read" href="#">To Eat</a>
+                              <a class="dropdown-item edit-eat" href="#">To Eat</a>
                               <a class="dropdown-item edit-read" href="#">To Read</a>
                               <a class="dropdown-item edit-watch" href="#">To Watch</a>
                               <a class="dropdown-item edit-buy" href="#">To Buy</a>

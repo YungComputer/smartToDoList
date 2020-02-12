@@ -13,6 +13,7 @@
 // });
 
 $(document).ready(function() {
+  let dropdown = $("#move-dropdown").html();
   // Appends all the data together for the to do list.
   const createToDoElement = function(todo) {
     // The argument is the task the user inputs.
@@ -22,8 +23,8 @@ $(document).ready(function() {
     let $todo = $("<span>")
       .addClass("task-item")
       .text(todo);
-    let $dropdown = $(".move-dropdown").clone(); //Clone of the dropdown menu
-    $form.append($checkBox, $todo, $dropdown);
+     //Clone of the dropdown menu
+    $form.append($checkBox, $todo, $(dropdown));
 
 
     return $form;
@@ -38,7 +39,7 @@ $(document).ready(function() {
 
   // Loads all the data up to be required by a POST.
 
-  const loadToDo = category => {
+  const loadToDo = (category) => {
     $.ajax({
       url: "/tasksAsJson", // what is the route we need?
       method: "GET",
@@ -73,21 +74,35 @@ $(document).ready(function() {
       });
   });
 
+
+  // $(".thing").on('click', e => {})
+
+  // $(".some-container").on('click', '.thing',   e => {})
+
+;[['.edit-read', 'books'], ['.edit-eat', 'restaurants'], ['.edit-watch', 'movies'], ['edit-buy', 'products']].forEach(spec => {
+  let className = spec[0];
+  let catName = spec[1];
+
+  let [className, catName] = spec;
   //Change Category
-  $(".edit-read").on("click", event => {
+  $(className).on("click", event => {
     event.preventDefault();
 
     $.ajax({
       url: "/todos",
       method: "POST",
-      data: $(".edit-read").closest("span")
+      data: $(className).closest("span")
     })
       .done(category => {
         $("textarea").val(""); // empties the text area
-        loadToDo("books");
+        loadToDo(catName);
       })
       .fail(err => {
         console.log(err);
       });
   });
+})
+
+
+
 });

@@ -170,6 +170,7 @@ const getCategory = (task) => {
   })
 }
 
+// POST /todos
 app.post('/todos', (req, res) => {
   const taskTitle = req.body.text;
   const userId = Number(req.session.userId);
@@ -189,6 +190,7 @@ app.post('/todos', (req, res) => {
   });
 
 });
+
 
 
 
