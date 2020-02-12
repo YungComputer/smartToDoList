@@ -13,7 +13,7 @@ const morgan     = require('morgan');
 
 // PG database client/connection setup
 const { Pool } = require('pg');
-const { dbParams, addTask } = require('./lib/db.js');
+const { dbParams, addTask, getAllTasks } = require('./lib/db.js');
 const db = new Pool(dbParams);
 db.connect();
 
@@ -111,17 +111,17 @@ app.get('/login/:id', (req, res) => {
   res.redirect('/');
 });
 
-const getTasksOfUser = (userId) => {
-  userId = Number(userId);
-  const userTasks = [];
-  for (let taskId in tasks) {
-    const task = tasks[taskId];
-    if (task.userId === userId) {
-      userTasks.push(task);
-    }
-  }
-  return userTasks;
-};
+// const getTasksOfUser = (userId) => {
+//   userId = Number(userId);
+//   const userTasks = [];
+//   for (let taskId in tasks) {
+//     const task = tasks[taskId];
+//     if (task.userId === userId) {
+//       userTasks.push(task);
+//     }
+//   }
+//   return userTasks;
+// };
 
 // app.get("/tasks", (req, res) => {
 //   const userId = req.session.userId;
@@ -138,16 +138,16 @@ const getTasksOfUser = (userId) => {
 
 
 // testing that it returns json object
-app.get("/tasksAsJson", (req, res) => {
-  const userId = req.session.userId;
-  if (userId) {
-    const userTasks = getTasksOfUser(userId);
-    res.json(userTasks);
-    // res.json(userTasks); ????
-  } else {
-    res.send("Not Logged In");
-  }
-});
+// app.get("/tasksAsJson", (req, res) => {
+//   const userId = req.session.userId;
+//   if (userId) {
+//     const userTasks = getTasksOfUser(userId);
+//     res.json(userTasks);
+//     // res.json(userTasks); ????
+//   } else {
+//     res.send("Not Logged In");
+//   }
+// });
 
 
 // Categorizes the task.  Promise.all returns an arrive of defined values.
