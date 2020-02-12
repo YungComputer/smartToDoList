@@ -2,7 +2,6 @@ $(document).ready(function () {
 
 // Appends all the data together for the to do list.
 const createToDoElement = function(todoTitle) {
-
   let $form = $('<form>').addClass('task-container');
   let $checkBox = $('<input type="checkbox">').addClass('checkbox');
   let $todo = $('<span>').addClass('task-item').text(todoTitle);
@@ -13,7 +12,6 @@ const createToDoElement = function(todoTitle) {
 
 // Renders the data to display the todo box.
 const renderToDo = function(todoTitle, category) {
-
   const $todos = $(`.${category}`);
   const $form = createToDoElement(todoTitle);
   $todos.append($form);
@@ -23,9 +21,14 @@ const renderToDo = function(todoTitle, category) {
 
 
   // Renders all the database tasks on user login
-  const renderToDos = function(takesinfunction) {
+  const renderToDos = function(taskArray) {
 
-  } // CREATE THE FUNCTIONALITY, ALLOW IT TO POPULATE THE LISTS WITH THE DATABASE INFORMATION BASED ON USER
+
+    taskArray.forEach((task) => {
+      console.log(task)
+    })
+  }
+  // CREATE THE FUNCTIONALITY, ALLOW IT TO POPULATE THE LISTS WITH THE DATABASE INFORMATION BASED ON USER
 
 
 
@@ -38,6 +41,7 @@ const loadToDo = (category) => {
     method: 'GET',
     dataType: 'JSON',
     success: (result) => {
+      console.log('here is the results on success in loadToDo:', result)
       renderToDo(result.tasks[0].title, category);
     },
     error: (jqxhr, status, err) => {
@@ -66,6 +70,5 @@ const loadToDo = (category) => {
         console.log(err);
       });
   });
-
 
 });

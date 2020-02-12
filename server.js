@@ -59,96 +59,9 @@ app.use("/users", usersRoutes(db));
 app.use("/tasks", tasksRoutes(db));
 // Note: mount other resources here, using the same pattern above
 
-// sample data
-const tasks = {
-  // "taskRandomID": {
-  //   id: "userRandomID",
-  //   title: "searching food",
-  //   IsDone: true,
-  //   category: "food",
-  //   userId: 1
-  // },
-  // "task2RandomID": {
-  //   id: "user2RandomID",
-  //   title: "searching books",
-  //   IsDone: false,
-  //   category: "books",
-  //   userId: 2
-  // },
-  // "task3RandomID": {
-  //   id: "user3RandomID",
-  //   title: "searching movies",
-  //   IsDone: true,
-  //   category: "movies",
-  //   userId: 3
-  // }
-};
-
-// Home page
-// Warning: avoid creating more routes in this file!
-// Separate them into separate routes files (see above).
-// app.get("/", (req, res) => {
-//   let userId = req.session.userId;
-//   if (userId) {
-//     let tempVars = {
-//       'user': userId
-//     };
-//     res.render("index", tempVars);
-//   } else {
-//     res.send("Not Logged In");
-//   }
-// });
-
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
-
-// Gets
-
-app.get('/login/:id', (req, res) => {
-  const userId = req.params.id;
-  req.session.userId = userId;
-  res.redirect('/');
-});
-
-// const getTasksOfUser = (userId) => {
-//   userId = Number(userId);
-//   const userTasks = [];
-//   for (let taskId in tasks) {
-//     const task = tasks[taskId];
-//     if (task.userId === userId) {
-//       userTasks.push(task);
-//     }
-//   }
-//   return userTasks;
-// };
-
-// app.get("/tasks", (req, res) => {
-//   const userId = req.session.userId;
-//   if (userId) {
-//     const userTasks = getTasksOfUser(userId);
-//     let tempVars = {
-//       'user': userId
-//     };
-//     res.render("index", tempVars);
-//   } else {
-//     res.send("Not Logged In");
-//   }
-// });
-
-
-// testing that it returns json object
-// app.get("/tasksAsJson", (req, res) => {
-//   const userId = req.session.userId;
-//   if (userId) {
-//     const userTasks = getTasksOfUser(userId);
-//     res.json(userTasks);
-//     // res.json(userTasks); ????
-//   } else {
-//     res.send("Not Logged In");
-//   }
-// });
-
 
 // Categorizes the task.  Promise.all returns an arrive of defined values.
 const getCategory = (task) => {
@@ -166,8 +79,39 @@ const getCategory = (task) => {
       return 'books'
     }
     return 'products'
+  });
+};
+
+// Gets the user login id
+app.get('/login/:id', (req, res) => {
+  const userId = req.params.id;
+  req.session.userId = userId;
+  res.redirect('/');
+
+  // getAllTasks(userId)
+  // .then((response) => {
+  //   console.log('this is the response for getAllTasks:', response.task_category)
+  //   // renderToDo(response.task_title, response.task_category)
+  //   res.send(response)
+  // })
+
+  // Trying to figure out if this promise can work in here.
+
+});
+
+app.get('/tasks', (req, res) => {
+  const userId = req.session.userId
+  Pool.getAllTasks(userId)
+  .then(data => {
+    console.log('HERE IS THE GET INFO FOR /tasks:', data)
+    res.send({data})
   })
-}
+  .catch(e => {
+    console.error(e);
+    res.send(e)
+  })
+
+})
 
 app.post('/todos', (req, res) => {
   const taskTitle = req.body.text;
@@ -180,28 +124,12 @@ app.post('/todos', (req, res) => {
       task_category: category,
     })
     .then((response) => {
-      // console.log(response[0].task_category)
+      console.log(response[0])
       res.send(response[0])
     })
-
-
-
-    // todo: to be replaced with database call
-    // const taskId = 6 // need to user random generator
-    // const taskId = Math.floor(Math.random() * 1000000);
-    // tasks[taskId] = {
-    //   id: taskId,
-    //   title: taskTitle,
-    //   IsDone: false,
-    //   "category": category,
-    //   "userId": userId
-    // }
   });
-
 });
-
-
 
 app.get('/', (req,res) => {
   res.render('index')
-})
+});
