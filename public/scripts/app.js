@@ -1,14 +1,16 @@
 $(document).ready(function() {
   let dropdown = $("#move-dropdown").html();
   // Appends all the data together for the to do list.
-  const createToDoElement = function(todo) {
+  const createToDoElement = function(task) {
     // The argument is the task the user inputs.
 
     let $form = $("<form>").addClass("task-container");
     let $checkBox = $('<input type="checkbox">').addClass("checkbox");
-    let $todo = $("<span>")
+    let $todo = $("<p>")
       .addClass("task-item")
-      .text(todo);
+      .text(task.task_title)
+      .data('taskId', task.id)
+      // console.log(task.id)
     //Clone of the dropdown menu
     $form.append($checkBox, $todo, $(dropdown));
 
@@ -16,16 +18,22 @@ $(document).ready(function() {
   };
 
   // Renders the data to display the todo box.
-  const renderToDo = function(todoTitle, category) {
-    const $todos = $(`.${category}`);
-    const $form = createToDoElement(todoTitle);
+  const renderToDo = function(task) {
+    const $todos = $(`.${task.task_category}`);
+    const $form = createToDoElement(task);
     $todos.append($form);
+
+
+    const tester = $('.task-item').data('taskId')
+    console.log(tester)
+
   };
 
   // Renders all the database tasks on user login
   const renderToDos = function(taskArray) {
     taskArray.forEach(task => {
-      renderToDo(task.task_title, task.task_category)
+
+      renderToDo(task)
       console.log(task);
     });
   };
@@ -62,8 +70,14 @@ $(document).ready(function() {
       method: "GET",
       dataType: "JSON",
       success: result => {
-        console.log("here is the results on success in loadToDo:", result);
+        // console.log("here is the results on success in loadToDo:", result);
         renderToDos(result.tasks);
+
+        $( ".target" ).change(function(event) {
+          console.log( event );
+        });
+
+
       },
       error: (jqxhr, status, err) => {
         console.error("Error on the lodaToDo function:", status, err);
@@ -103,11 +117,14 @@ $(document).ready(function() {
     [".edit-read", "books"],
     [".edit-eat", "restaurants"],
     [".edit-watch", "movies"],
-    ["edit-buy", "products"]
+    [".edit-buy", "products"]
   ].forEach(spec => {
     let [className, catName] = spec;
+      console.log(spec)
 
     $(className).on("click", event => {
+      console.log("Hello on Click")
+
       event.preventDefault();
 
       $.ajax({

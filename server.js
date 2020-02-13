@@ -117,7 +117,7 @@ app.get('/tasks', (req, res) => {
 
 })
 
-POST /todos
+// POST /todos
 app.post('/todos', (req, res) => {
   const taskTitle = req.body.text;
   const userId = Number(req.session.userId);
@@ -164,7 +164,7 @@ app.post('/task/:id/edit', (req, res) => {
       UPDATE tasks
       SET task_category = $1
       WHERE user_id = $2 AND id = $3`,
-      [taskCaregory, userId, taskId]
+      [taskCategory, userId, taskId]
     )
     .then(data => {
       res.json({success: true});
