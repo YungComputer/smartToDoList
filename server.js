@@ -114,20 +114,36 @@ app.get('/tasks', (req, res) => {
 })
 
 // POST /todos
-app.post('/todos', (req, res) => {
-  const taskTitle = req.body.text;
-  const userId = Number(req.session.userId);
+// app.post('/todos', (req, res) => {
+//   const taskTitle = req.body.text;
+//   const userId = Number(req.session.userId);
 
-  getCategory(taskTitle).then(category => {
-    addTask({
-      user_id: userId,
-      task_title: taskTitle,
-      task_category: category,
-    })
-    .then((response) => {
-      console.log(response[0])
-      res.send(response[0])
-    })
+//   getCategory(taskTitle).then(category => {
+//     addTask({
+//       user_id: userId,
+//       task_title: taskTitle,
+//       task_category: category,
+//     })
+//     .then((response) => {
+//       console.log(response[0])
+//       res.send(response[0])
+//     })
+//   });
+// });
+
+app.post('/todos', (req, res) => {
+  console.log('response body:', req.body);
+  const title = req.body.text;
+  const user_id = Number(req.session.userId);
+  getCategory(title).then((category) => {
+
+    return addTask({user_id, title, category});
+  })
+  .then((rows) => {
+    console.log('rows:', rows);
+    res.status(200).json(rows[0]);
+  }).catch((error) => {
+    res.status(500).json({error});
   });
 });
 
