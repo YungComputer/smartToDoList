@@ -2,6 +2,26 @@
   box-sizing: border-box;
 }
 
+/* STYLING FOR THE LIST ITEMS */
+.task-container {
+  display: flex;
+}
+
+.checkbox {
+  align-self: center;
+}
+
+.task-item {
+  align-self: center;
+}
+
+form .move-dropdown {
+  margin-left: auto;
+}
+
+
+/* STYLING FOR THE LIST ITEMS */
+
 body {
   font-family: 'Nunito Sans', sans-serif;
 }
