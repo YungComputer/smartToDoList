@@ -25,6 +25,7 @@ $(document).ready(function() {
   // Renders all the database tasks on user login
   const renderToDos = function(taskArray) {
     taskArray.forEach(task => {
+      renderToDo(task.task_title, task.task_category)
       console.log(task);
     });
   };
@@ -55,10 +56,22 @@ $(document).ready(function() {
     });
   };
 
+  const loadToDos = category => {
+    $.ajax({
+      url: "/tasks",
+      method: "GET",
+      dataType: "JSON",
+      success: result => {
+        console.log("here is the results on success in loadToDo:", result);
+        renderToDos(result.tasks);
+      },
+      error: (jqxhr, status, err) => {
+        console.error("Error on the lodaToDo function:", status, err);
+      }
+    });
+  };
 
-
-
-  // loadToDo(); // this is to auto populate data from our DB for the starting page.
+  loadToDos(); // this is to auto populate data from our DB for the starting page.
 
   // when form gets submitted this should run.
   $("#submit-btn").on("click", event => {
