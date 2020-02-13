@@ -5,21 +5,13 @@
 /* STYLING FOR THE LIST ITEMS */
 .task-container {
   display: flex;
+  align-items: center;
 }
 
-.checkbox {
-  align-self: center;
-}
-
-.task-item {
-  align-self: center;
-}
-
-form .move-dropdown {
+select {
   align-self: center;
   margin-left: auto;
 }
-
 
 /* STYLING FOR THE LIST ITEMS */
 

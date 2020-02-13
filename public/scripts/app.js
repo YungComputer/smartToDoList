@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  let dropdown = $("#move-dropdown").html();
+  let dropdown = $("#move-dropdown").html().change(event => { event.target.value });
   // Appends all the data together for the to do list.
   const createToDoElement = function(task) {
     // The argument is the task the user inputs.
