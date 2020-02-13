@@ -1,4 +1,4 @@
-// require('dotenv').config({ path: '../.env' });
+require('dotenv').config({ path: '../.env' });
 // Leave this for testing as standalone
 
 const omdb = require("omdb-client");
@@ -8,6 +8,7 @@ const movie = (task) => {
   return new Promise ((resolve, reject) => {
     omdb.get({ apiKey: key, title: task }, function(err, data) {
       if (!err) {
+        console.log(data)
         console.log('Here is your movie:', data.Title);
         return resolve(true);
       }
