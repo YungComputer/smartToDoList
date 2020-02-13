@@ -1,3 +1,7 @@
+<script>
+
+
+
 $(document).ready(function() {
   let dropdown = $("#move-dropdown").html();
   // Appends all the data together for the to do list.
@@ -31,11 +35,12 @@ $(document).ready(function() {
   // CREATE THE FUNCTIONALITY, ALLOW IT TO POPULATE THE LISTS WITH THE DATABASE INFORMATION BASED ON USER
 
   // Loads all the data up to be required by a POST.
-  const loadToDo = (category, currentUser) => {
+  const loadToDo = (category) => {
     // $.get('/tasks', function(data) {
     //   console.log('the data in the loadToDo:', data)
     // })
-    console.log("Here is your currentUser:", currentUser)
+
+    // console.log("Here is your currentUser:", '<%- user.userId %>' )
 
     $.ajax({
       url: "/tasks",
@@ -44,8 +49,8 @@ $(document).ready(function() {
       success: result => {
         console.log("here is the results on success in loadToDo:", result);
         result.tasks.forEach(x => {
-          console.log(x)
-          if(x.user_id === currentUser)
+          // console.log(x)
+          if(x.user_id == '<%- user.userId %>')
           renderToDo(x.task_title, x.task_category)
         })
       },
@@ -55,10 +60,9 @@ $(document).ready(function() {
     });
   };
 
+  loadToDo(); // this is to auto populate data from our DB for the starting page.
 
 
-
-  // loadToDo(); // this is to auto populate data from our DB for the starting page.
 
   // when form gets submitted this should run.
   $("#submit-btn").on("click", event => {
@@ -112,3 +116,5 @@ $(document).ready(function() {
     });
   });
 });
+
+</script>

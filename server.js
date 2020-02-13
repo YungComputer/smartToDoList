@@ -84,18 +84,20 @@ const getCategory = (task) => {
 
 // Gets the user login id
 app.get('/login/:id', (req, res) => {
+  console.log(req.session)
+  console.log('HERE AT login:', req.session);
+
   const userId = req.params.id;
   req.session.userId = userId;
   res.redirect('/');
 
-  // getAllTasks(userId)
-  // .then((response) => {
-  //   console.log('this is the response for getAllTasks:', response.task_category)
-  //   // renderToDo(response.task_title, response.task_category)
-  //   res.send(response)
-  // })
+  getAllTasks(userId)
+  .then((response) => {
+    console.log('this is the response for getAllTasks:', response)
+    // renderToDo(response.task_title, response.task_category)
+    // res.send(response)
+  })
 
-  // Trying to figure out if this promise can work in here.
 
 });
 
@@ -131,6 +133,8 @@ app.post('/todos', (req, res) => {
   });
 });
 
+
 app.get('/', (req,res) => {
+  console.log(req.session)
   res.render('index')
 });
