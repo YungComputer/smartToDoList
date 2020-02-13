@@ -71,7 +71,7 @@ $(document).ready(function() {
     });
   };
 
-  loadToDos(); // this is to auto populate data from our DB for the starting page.
+ 
 
   // when form gets submitted this should run.
   $("#submit-btn").on("click", event => {
@@ -96,6 +96,7 @@ $(document).ready(function() {
   }
 });
 
+loadToDos(); // this is to auto populate data from our DB for the starting page.
 
   //Change Category
 
@@ -125,3 +126,5 @@ $(document).ready(function() {
     });
   });
 });
+
+

@@ -119,7 +119,9 @@ app.get('/tasks', (req, res) => {
 
 // POST /todos
 // app.post('/todos', (req, res) => {
+//   // taskTitle
 //   const taskTitle = req.body.text;
+//   // userId
 //   const userId = Number(req.session.userId);
 
 //   getCategory(taskTitle).then(category => {
@@ -139,6 +141,9 @@ app.post('/todos', (req, res) => {
   console.log('response body:', req.body);
   const title = req.body.text;
   const user_id = Number(req.session.userId);
+  
+  console.log(user_id);
+  
   getCategory(title).then((category) => {
 
     return addTask({user_id, title, category});
@@ -152,8 +157,6 @@ app.post('/todos', (req, res) => {
 });
 
 
-<<<<<<< HEAD
-=======
 app.post('/task/:id/edit', (req, res) => {
   const userId = Number(req.session.userId);
   const taskId = req.params.id;
@@ -177,7 +180,6 @@ app.post('/task/:id/edit', (req, res) => {
   }
 })
 
->>>>>>> 31ecf95fd6d371a1b61f68979e5249892f47c30e
 app.get('/', (req,res) => {
   console.log(req.session)
   res.render('index', {user: req.session})
