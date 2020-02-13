@@ -36,11 +36,6 @@ $(document).ready(function() {
 
   // Loads all the data up to be required by a POST.
   const loadToDo = (category) => {
-    // $.get('/tasks', function(data) {
-    //   console.log('the data in the loadToDo:', data)
-    // })
-
-    // console.log("Here is your currentUser:", '<%- user.userId %>' )
 
     $.ajax({
       url: "/tasks",
@@ -49,7 +44,6 @@ $(document).ready(function() {
       success: result => {
         console.log("here is the results on success in loadToDo:", result);
         result.tasks.forEach(x => {
-          // console.log(x)
           if(x.user_id == '<%- user.userId %>')
           renderToDo(x.task_title, x.task_category)
         })

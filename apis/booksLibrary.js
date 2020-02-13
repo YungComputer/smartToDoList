@@ -2,26 +2,25 @@
 
 const books = require("google-books-search");
 const key = process.env.BOOKS_API_KEY;
-// let bookInput = "Guts"; // Needs to change into our search parameter.
 
-//bookInput will be the search parameter from AJAX
 const book = function(task) {
+  const bookSearch = task.toLowerCase();
+
   return new Promise ((resolve, reject) => {
-    books.search(task, key, function(error, results) {
+    books.search(bookSearch, key, function(error, results) {
+
       if (!error) {
         for (const bookTitle of results) {
-          for (const title in bookTitle) {
-            if (bookTitle[title] === task) {
-              console.log("I found book:", task);
-              return resolve(true);
-              // console.log(results)
-            }
+          const lowerCaseTitle = bookTitle.title.toLowerCase();
+          if (lowerCaseTitle.search(bookSearch) === 0){
+            console.log('We found a book for you:', bookTitle.title)
+            return resolve(true);
           }
         }
+        console.log('Sorry couldn\'t find a book with the name:', task)
         return resolve(false);
 
       } else {
-        // Jeremy thinks this code is misleading
         console.log(error, 'nothing showed up for books');
         return resolve(false);
       }

@@ -16,16 +16,18 @@ const restaurant = (task) => {
   .then(response => {
 
     const businesses = response.jsonBody.businesses; // Returns an array of businesses
+    const lowerCaseName = task.toLowerCase();
+
     for (let business of businesses) {
-      for (let x in business) {
-        if (business[x] === task) { // Needs to check against our search field query.
-        console.log('you have restaurant:', task);
+      const businessName = business.name.toLowerCase();
+
+      if (businessName.search(lowerCaseName) === 0){
+        console.log('You have restaurant:', businessName)
         return true;
-        }
       }
     }
+    console.log('Can\'t find that restaurant:', task)
     return false;
-
   })
   .catch(e => {
     console.log(e);
