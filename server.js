@@ -73,11 +73,11 @@ const getCategory = (task) => {
     if (results[0]) {
       return 'restaurants'
     }
-    if (results[2]) {
-      return 'movies'
-    }
     if (results[1]) {
       return 'books'
+    }
+    if (results[2]) {
+      return 'movies'
     }
     return 'products'
   });
