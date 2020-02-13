@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Smart To-Do List</title>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Smart To-Do List</title>
 
 
-    <!-- Font Styles -->
-    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans&display=swap" rel="stylesheet">
-    <!-- External CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
+  <!-- Font Styles -->
+  <link href="https://fonts.googleapis.com/css?family=Nunito+Sans&display=swap" rel="stylesheet">
+  <!-- External CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <!-- CSS Styles -->
     <link rel="stylesheet" type="text/css" href="/styles/style.css" />
@@ -52,7 +53,7 @@
 
 
 <!-- Template for Move/Edit Dropdown menu -->
-  <script type="text/template" id="move-dropdown">
+<script type="text/template" id="move-dropdown">
     <span class="move-dropdown">
         <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Move
             <span class="caret"></span></button>
@@ -65,110 +66,67 @@
     </span>
   </script>
 
-  <!-- main container with categories and lists -->
-  <div class="container">
-    <div class="row">
-      <div class="col-sm" id="to-eat">
-        <div class="card" style="width: 15rem;">
-          <img src="https://image.flaticon.com/icons/svg/481/481637.svg" class="card-img-top" alt="avatar" />
-          <div class="card-body">
-            <h5 class="card-title text-center">To Eat</h5>
-          </div>
-          <form class="restaurants">
-            <!-- <input class="checkbox" type="checkbox"> -->
-            <!-- <span class="task-item">Arby's</span>
-            <span class="move-dropdown">
-                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Move
-                    <span class="caret"></span></button>
-                    <ul class="dropdown-menu">
-                        <a class="dropdown-item edit-eat" href="#">To Eat</a>
-                        <a class="dropdown-item edit-read" href="#">To Read</a>
-                        <a class="dropdown-item edit-watch" href="#">To Watch</a>
-                        <a class="dropdown-item edit-buy" href="#">To Buy</a>
-                    </ul>
-            </span>     -->
-          </form>
-          <ul class="list-group list-group-flush">
-            <div id="eat" class="eat-container list-group-item"></div>
-          </ul>
+<!-- main container with categories and lists -->
+<div class="container">
+  <div class="row">
+    <div class="col-sm" id="to-eat">
+      <div class="card" style="width: 15rem;">
+        <img src="https://image.flaticon.com/icons/svg/481/481637.svg" class="card-img-top" alt="avatar" />
+        <div class="card-body">
+          <h5 class="card-title text-center">To Eat</h5>
         </div>
+        <form class="restaurants">
+
+        </form>
+        <ul class="list-group list-group-flush">
+          <div id="eat" class="eat-container list-group-item"></div>
+        </ul>
       </div>
-      <!-- To Read Category -->
-      <div class="col-sm" id="to-read">
-          <div class="card" style="width: 15rem;">
-            <img src="https://image.flaticon.com/icons/svg/864/864685.svg" class="card-img-top" alt="avatar" />
-            <div class="card-body">
-              <h5 class="card-title text-center">To Read</h5>
-            </div>
-            <form class="books">
-              <!-- <input class="checkbox" type="checkbox">
-              <span class="task-item">The Hobbit</span>
-              <span class="move-dropdown">
-                  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Move
-                      <span class="caret"></span></button>
-                      <ul class="dropdown-menu">
-                          <a class="dropdown-item edit-eat" href="#">To Eat</a>
-                          <a class="dropdown-item edit-read" href="#">To Read</a>
-                          <a class="dropdown-item edit-watch" href="#">To Watch</a>
-                          <a class="dropdown-item edit-buy" href="#">To Buy</a>
-                      </ul>
-              </span> -->
-            </form>
-            <ul class="list-group list-group-flush">
-              <div id="read" class="read-container list-group-item"></div>
-            </ul>
-          </div>
+    </div>
+    <!-- To Read Category -->
+    <div class="col-sm" id="to-read">
+      <div class="card" style="width: 15rem;">
+        <img src="https://image.flaticon.com/icons/svg/864/864685.svg" class="card-img-top" alt="avatar" />
+        <div class="card-body">
+          <h5 class="card-title text-center">To Read</h5>
         </div>
-        <!-- To Watch Category -->
-        <div class="col-sm" id="to-watch">
-            <div class="card" style="width: 15rem;">
-              <img src="https://image.flaticon.com/icons/svg/633/633600.svg" class="card-img-top" alt="avatar" />
-              <div class="card-body">
-                <h5 class="card-title text-center">To Watch</h5>
-              </div>
-              <form class="movies">
-                <!-- <input class="checkbox" type="checkbox">
-                <span class="task-item">Interstellar</span>
-                <span class="move-dropdown">
-                    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Move
-                        <span class="caret"></span></button>
-                        <ul class="dropdown-menu">
-                            <a class="dropdown-item edit-eat" href="#">To Eat</a>
-                            <a class="dropdown-item edit-read" href="#">To Read</a>
-                            <a class="dropdown-item edit-watch" href="#">To Watch</a>
-                            <a class="dropdown-item edit-buy" href="#">To Buy</a>
-                        </ul>
-                </span> -->
-              </form>
-              <ul class="list-group list-group-flush">
-                <div id="watch" class="watch-container list-group-item"></div>
-              </ul>
-            </div>
-          </div>
-          <!-- To Buy Category -->
-          <div class="col-sm" id="to-buy">
-              <div class="card" style="width: 15rem;">
-                <img src="https://image.flaticon.com/icons/svg/1019/1019709.svg" class="card-img-top" alt="avatar" />
-                <div class="card-body">
-                  <h5 class="card-title text-center">To Buy</h5>
-                </div>
-                <form class="products">
-                  <!-- <input class="checkbox" type="checkbox">
-                  <span class="task-item">Toilet paper</span>
-                  <span class="move-dropdown">
-                      <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Move
-                          <span class="caret"></span></button>
-                          <ul class="dropdown-menu">
-                              <a class="dropdown-item edit-eat" href="#">To Eat</a>
-                              <a class="dropdown-item edit-read" href="#">To Read</a>
-                              <a class="dropdown-item edit-watch" href="#">To Watch</a>
-                              <a class="dropdown-item edit-buy" href="#">To Buy</a>
-                          </ul>
-                  </span> -->
-                </form>
-                <ul class="list-group list-group-flush">
-                  <div id="buy" class="buy-container list-group-item"></div>
-                </ul>
-              </div>
-            </div>
+        <form class="books">
+
+        </form>
+        <ul class="list-group list-group-flush">
+          <div id="read" class="read-container list-group-item"></div>
+        </ul>
+      </div>
+    </div>
+    <!-- To Watch Category -->
+    <div class="col-sm" id="to-watch">
+      <div class="card" style="width: 15rem;">
+        <img src="https://image.flaticon.com/icons/svg/633/633600.svg" class="card-img-top" alt="avatar" />
+        <div class="card-body">
+          <h5 class="card-title text-center">To Watch</h5>
+        </div>
+        <form class="movies">
+
+        </form>
+        <ul class="list-group list-group-flush">
+          <div id="watch" class="watch-container list-group-item"></div>
+        </ul>
+      </div>
+    </div>
+    <!-- To Buy Category -->
+    <div class="col-sm" id="to-buy">
+      <div class="card" style="width: 15rem;">
+        <img src="https://image.flaticon.com/icons/svg/1019/1019709.svg" class="card-img-top" alt="avatar" />
+        <div class="card-body">
+          <h5 class="card-title text-center">To Buy</h5>
+        </div>
+        <form class="products">
+
+        </form>
+        <ul class="list-group list-group-flush">
+          <div id="buy" class="buy-container list-group-item"></div>
+        </ul>
+      </div>
+    </div>
+
 </html>
