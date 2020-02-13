@@ -12,7 +12,7 @@ const movie = (task) => {
         return resolve(true);
       }
       if (err) {
-        console.error(err);
+        console.log('Can\'t find a movie with that title:', task);
         return resolve(false);
       }
     });
