@@ -27,6 +27,7 @@ const { movie } = require('./apis/movieLibrary');
 //         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
 app.use(morgan('dev'));
 
+
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -98,6 +99,7 @@ app.get('/login/:id', (req, res) => {
     // res.send(response)
   })
 
+  // Trying to figure out if this promise can work in here.
 
 });
 
@@ -136,5 +138,5 @@ app.post('/todos', (req, res) => {
 
 app.get('/', (req,res) => {
   console.log(req.session)
-  res.render('index')
+  res.render('index', {user: req.session})
 });
