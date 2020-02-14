@@ -1,8 +1,38 @@
 $(document).ready(function() {
-  let dropdown = $("#move-dropdown").html().change(event => { event.target.value });
   // Appends all the data together for the to do list.
   const createToDoElement = function(task) {
-    // The argument is the task the user inputs.
+
+    let options =
+
+    {restaurants:
+      $(`<select class="target">
+          <option value="restaurants" selected>To Eat</option>
+          <option value="books">To Read</option>
+          <option value="movies">To Watch</option>
+          <option value="products">To Buy</option>
+    </select>`),
+    books:
+    $(`<select class="target">
+        <option value="restaurants" >To Eat</option>
+        <option value="books" selected>To Read</option>
+        <option value="movies">To Watch</option>
+        <option value="products">To Buy</option>
+  </select>`),
+    movies:
+      $(`<select class="target">
+          <option value="restaurants">To Eat</option>
+          <option value="books">To Read</option>
+          <option value="movies" selected>To Watch</option>
+          <option value="products">To Buy</option>
+    </select>`),
+    products:
+      $(`<select class="target">
+          <option value="restaurants">To Eat</option>
+          <option value="books">To Read</option>
+          <option value="movies">To Watch</option>
+          <option value="products" selected>To Buy</option>
+    </select>`)
+  }
 
     let $form = $("<form>").addClass("task-container");
     let $checkBox = $('<input type="checkbox">').addClass("checkbox");
@@ -10,9 +40,19 @@ $(document).ready(function() {
       .addClass("task-item")
       .text(task.task_title)
       .data('taskId', task.id)
-      // console.log(task.id)
-    //Clone of the dropdown menu
-    $form.append($checkBox, $todo, $(dropdown));
+
+      const editButton = options[task.task_category];
+
+      console.log(task)
+
+
+      editButton.change( (event) => {
+        $.post(`/edit/${task.id}`, {category: event.target.value})
+        .then(() => {loadToDos()})
+
+      })
+
+    $form.append($checkBox, $todo, editButton);
 
     return $form;
   };
@@ -22,11 +62,6 @@ $(document).ready(function() {
     const $todos = $(`.${task.task_category}`);
     const $form = createToDoElement(task);
     $todos.append($form);
-
-
-    const tester = $('.task-item').data('taskId')
-    console.log(tester)
-
   };
 
   // Renders all the database tasks on user login
@@ -34,35 +69,38 @@ $(document).ready(function() {
     taskArray.forEach(task => {
 
       renderToDo(task)
-      console.log(task);
     });
   };
   // CREATE THE FUNCTIONALITY, ALLOW IT TO POPULATE THE LISTS WITH THE DATABASE INFORMATION BASED ON USER
 
-  // Loads all the data up to be required by a POST.
-  const loadToDo = (category, currentUser) => {
-    // $.get('/tasks', function(data) {
-    //   console.log('the data in the loadToDo:', data)
-    // })
-    console.log("Here is your currentUser:", currentUser)
 
-    $.ajax({
-      url: "/tasks",
-      method: "GET",
-      dataType: "JSON",
-      success: result => {
-        console.log("here is the results on success in loadToDo:", result);
-        result.tasks.forEach(x => {
-          console.log(x)
-          if(x.user_id === currentUser)
-          renderToDo(x.task_title, x.task_category)
-        })
-      },
-      error: (jqxhr, status, err) => {
-        console.error("Error on the loadToDo function:", status, err);
-      }
-    });
-  };
+
+  const clearList = function() {
+    $('.books').empty();
+    $('.movies').empty();
+    $('.restaurants').empty();
+    $('.products').empty();
+  }
+
+  // Loads all the data up to be required by a POST.
+  // const loadToDo = (category, currentUser) => {
+  //   $.ajax({
+  //     url: "/tasks",
+  //     method: "GET",
+  //     dataType: "JSON",
+  //     success: result => {
+
+  //       clearList();
+  //       result.tasks.forEach(x => {
+  //         if(x.user_id === currentUser)
+  //         renderToDo(x.task_title, x.task_category)
+  //       })
+  //     },
+  //     error: (jqxhr, status, err) => {
+  //       console.error("Error on the loadToDo function:", status, err);
+  //     }
+  //   });
+  // };
 
   const loadToDos = category => {
     $.ajax({
@@ -70,14 +108,8 @@ $(document).ready(function() {
       method: "GET",
       dataType: "JSON",
       success: result => {
-        // console.log("here is the results on success in loadToDo:", result);
+        clearList();
         renderToDos(result.tasks);
-
-        $( ".target" ).change(function(event) {
-          console.log( event );
-        });
-
-
       },
       error: (jqxhr, status, err) => {
         console.error("Error on the lodaToDo function:", status, err);
@@ -102,7 +134,7 @@ $(document).ready(function() {
     })
       .done(response => {
         $("textarea").val(""); // empties the text area
-        renderToDo(response.task_title, response.task_category);
+        renderToDo(response);
       })
       .fail(err => {
         console.log(err);
@@ -110,35 +142,33 @@ $(document).ready(function() {
   }
 });
 
-
   //Change Category
+//   ;[
+//     [".edit-read", "books"],
+//     [".edit-eat", "restaurants"],
+//     [".edit-watch", "movies"],
+//     [".edit-buy", "products"]
+//   ].forEach(spec => {
+//     let [className, catName] = spec;
+//       console.log(spec)
 
-  ;[
-    [".edit-read", "books"],
-    [".edit-eat", "restaurants"],
-    [".edit-watch", "movies"],
-    [".edit-buy", "products"]
-  ].forEach(spec => {
-    let [className, catName] = spec;
-      console.log(spec)
+//     $(className).on("click", event => {
+//       console.log("Hello on Click")
 
-    $(className).on("click", event => {
-      console.log("Hello on Click")
+//       event.preventDefault();
 
-      event.preventDefault();
-
-      $.ajax({
-        url: "/todos",
-        method: "POST",
-        data: $(className).closest("span")
-      })
-        .done(category => {
-          $("textarea").val(""); // empties the text area
-          loadToDo(catName);
-        })
-        .fail(err => {
-          console.log(err);
-        });
-    });
-  });
+//       $.ajax({
+//         url: "/todos",
+//         method: "POST",
+//         data: $(className).closest("span")
+//       })
+//         .done(category => {
+//           $("textarea").val(""); // empties the text area
+//           loadToDo(catName);
+//         })
+//         .fail(err => {
+//           console.log(err);
+//         });
+//     });
+//   });
 });

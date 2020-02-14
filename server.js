@@ -107,7 +107,6 @@ app.get('/tasks', (req, res) => {
   const userId = req.session.userId
   Pool.getAllTasks(userId)
   .then(data => {
-    console.log('HERE IS THE GET INFO FOR /tasks:', data)
     res.send({data})
   })
   .catch(e => {
@@ -152,27 +151,23 @@ app.post('/todos', (req, res) => {
 // });
 
 
-app.post('/task/:id/edit', (req, res) => {
+app.post('/edit/:id', (req, res) => {
   const userId = Number(req.session.userId);
   const taskId = req.params.id;
-  const taskCaregory = req.body.category;
-  console.log(userId)
-  console.log(taskCaregory)
+  const taskCategory = req.body.category;
 
-  if (userId) {
+
     db.query(`
       UPDATE tasks
       SET task_category = $1
-      WHERE user_id = $2 AND id = $3`,
-      [taskCategory, userId, taskId]
-    )
+      WHERE id = $2`,
+      [taskCategory, taskId])
     .then(data => {
       res.json({success: true});
     })
     .catch(err => {
       res.status(500).json({ error: err.message });
     });
-  }
 })
 
 app.get('/', (req,res) => {
