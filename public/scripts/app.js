@@ -43,9 +43,6 @@ $(document).ready(function() {
 
       const editButton = options[task.task_category];
 
-      console.log(task)
-
-
       editButton.change( (event) => {
         $.post(`/edit/${task.id}`, {category: event.target.value})
         .then(() => {loadToDos()})
@@ -96,6 +93,7 @@ $(document).ready(function() {
   };
 
 
+  loadToDos(); // this is to auto populate data from our DB for the starting page.
 
   // when form gets submitted this should run.
   $("#submit-btn").on("click", event => {
