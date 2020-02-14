@@ -91,16 +91,6 @@ app.get('/login/:id', (req, res) => {
   const userId = req.params.id;
   req.session.userId = userId;
   res.redirect('/');
-
-  getAllTasks(userId)
-  .then((response) => {
-    console.log('this is the response for getAllTasks:', response)
-    // renderToDo(response.task_title, response.task_category)
-    // res.send(response)
-  })
-
-  // Trying to figure out if this promise can work in here.
-
 });
 
 app.get('/tasks', (req, res) => {
@@ -134,40 +124,22 @@ app.post('/todos', (req, res) => {
   });
 });
 
-// app.post('/todos', (req, res) => {
-//   console.log('response body:', req.body);
-//   const title = req.body.text;
-//   const user_id = Number(req.session.userId);
-//   getCategory(title).then((category) => {
-
-//     return addTask({user_id, title, category});
-//   })
-//   .then((rows) => {
-//     console.log('rows:', rows);
-//     res.status(200).json(rows[0]);
-//   }).catch((error) => {
-//     res.status(500).json({error});
-//   });
-// });
-
-
 app.post('/edit/:id', (req, res) => {
   const userId = Number(req.session.userId);
   const taskId = req.params.id;
   const taskCategory = req.body.category;
 
-
-    db.query(`
-      UPDATE tasks
-      SET task_category = $1
-      WHERE id = $2`,
-      [taskCategory, taskId])
-    .then(data => {
-      res.json({success: true});
-    })
-    .catch(err => {
-      res.status(500).json({ error: err.message });
-    });
+  db.query(`
+    UPDATE tasks
+    SET task_category = $1
+    WHERE id = $2`,
+    [taskCategory, taskId])
+  .then(data => {
+    res.json({success: true});
+  })
+  .catch(err => {
+    res.status(500).json({ error: err.message });
+  });
 })
 
 app.get('/', (req,res) => {
