@@ -67,13 +67,10 @@ $(document).ready(function() {
   // Renders all the database tasks on user login
   const renderToDos = function(taskArray) {
     taskArray.forEach(task => {
-
       renderToDo(task)
     });
   };
   // CREATE THE FUNCTIONALITY, ALLOW IT TO POPULATE THE LISTS WITH THE DATABASE INFORMATION BASED ON USER
-
-
 
   const clearList = function() {
     $('.books').empty();
@@ -83,25 +80,6 @@ $(document).ready(function() {
   }
 
   // Loads all the data up to be required by a POST.
-  // const loadToDo = (category, currentUser) => {
-  //   $.ajax({
-  //     url: "/tasks",
-  //     method: "GET",
-  //     dataType: "JSON",
-  //     success: result => {
-
-  //       clearList();
-  //       result.tasks.forEach(x => {
-  //         if(x.user_id === currentUser)
-  //         renderToDo(x.task_title, x.task_category)
-  //       })
-  //     },
-  //     error: (jqxhr, status, err) => {
-  //       console.error("Error on the loadToDo function:", status, err);
-  //     }
-  //   });
-  // };
-
   const loadToDos = category => {
     $.ajax({
       url: "/tasks",
@@ -142,33 +120,4 @@ $(document).ready(function() {
   }
 });
 
-  //Change Category
-//   ;[
-//     [".edit-read", "books"],
-//     [".edit-eat", "restaurants"],
-//     [".edit-watch", "movies"],
-//     [".edit-buy", "products"]
-//   ].forEach(spec => {
-//     let [className, catName] = spec;
-//       console.log(spec)
-
-//     $(className).on("click", event => {
-//       console.log("Hello on Click")
-
-//       event.preventDefault();
-
-//       $.ajax({
-//         url: "/todos",
-//         method: "POST",
-//         data: $(className).closest("span")
-//       })
-//         .done(category => {
-//           $("textarea").val(""); // empties the text area
-//           loadToDo(catName);
-//         })
-//         .fail(err => {
-//           console.log(err);
-//         });
-//     });
-//   });
 });
