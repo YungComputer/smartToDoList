@@ -36,15 +36,12 @@ $(document).ready(function() {
 
     let $form = $("<form>").addClass("task-container");
     let $checkBox = $('<input type="checkbox">').addClass("checkbox");
-    let $todo = $("<p>")
+    let $todo = $("<p>").addClass("title-text")
       .addClass("task-item")
       .text(task.task_title)
       .data('taskId', task.id)
 
       const editButton = options[task.task_category];
-
-      console.log(task)
-
 
       editButton.change( (event) => {
         $.post(`/edit/${task.id}`, {category: event.target.value})
@@ -61,7 +58,9 @@ $(document).ready(function() {
   const renderToDo = function(task) {
     const $todos = $(`.${task.task_category}`);
     const $form = createToDoElement(task);
-    $todos.append($form);
+    const $hr = $("<hr>");
+
+    $todos.append($form, $hr);
   };
 
   // Renders all the database tasks on user login
